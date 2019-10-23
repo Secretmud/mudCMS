@@ -34,6 +34,10 @@ include_once 'assets/data.php';
                         <?php
                         if(isset($_POST["submit"])) {
                             $content = $_POST["content"];
+                            $content = htmlspecialchars($content, ENT_QUOTES);
+                            $title = $_POST["title"];
+                            $image = $_POST["postimage"];
+                            $category = $_POST["category"];
                             $replace = ["<div class='code'>$1</div>",
                                         "<span class='function'>$1(<span class='var'>$2</span>)</span>",
                                         "<span class='type'>$1</span>",
@@ -47,7 +51,9 @@ include_once 'assets/data.php';
                                      "/([0-9])/",
                                      "/\[link\](.*?)\:(.*?)\[\/link\]/"];
                             $content = preg_replace($find, $replace, $content);
+
                             var_dump($content);
+                            enter_content($conn, $title, $image, $category, $content);
                         }
                         ?>
 					</div>
