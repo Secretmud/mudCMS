@@ -1,0 +1,347 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+
+
+
+
+html {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;   
+}
+.menu {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2rem;
+    justify-content: flex-start;
+    float: right;
+    padding: 0;
+    box-shadow: none;
+}
+.name-menu {
+    display: none
+}
+.items {
+    flex: 1 1 20px;
+    margin: 4px;
+}
+.style-pick {
+    position: absolute;
+    top:0;
+    right: 0;
+}
+.header {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.header-content {
+	font-family: monospace;
+	font-size: 1.3em;
+	text-decoration: none;
+    word-wrap: break-word;
+    display: flex;
+    margin: 0.3em;
+    width: 10%
+}
+
+/*
+    Site layout
+*/
+.main {
+    display: grid;
+    /*grid-template-columns: 1fr 2fr 2fr;*/
+    margin: auto;
+    width: 70%;
+    padding-top: 1em;
+    grid-gap: 15px;
+}
+.main > .left-bar, .center-top, .center-bottom {
+    padding: 0.2em;
+}
+.left-bar, .center-top, .center-bottom {
+    font-size: 1.5em;
+}
+/*
+    grid-positioning, it's the easiest way of getting the layout you want
+*/
+
+.left-bar {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 5;
+}
+.center-top {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+.grid-content {
+    display: grid;
+    width: 100%;
+    justify-content: center;
+}
+.grid-content-code {
+    display: grid;
+    grid-template-columns: 80%;
+    width: 100%;
+    justify-content: center;
+}
+.grid-content > div {
+    margin: 1em;
+}
+
+.center-bottom {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 5;
+}
+/*
+    Formating content and such
+*/
+
+.content-title {
+    font-size: 1.8rem;
+    margin-bottom: 0.4em;
+}
+.content-info {
+    font-size: 0.8rem;
+    margin-bottom: 1.2em;
+    margin-left: 0.5em;
+}
+.content {
+    margin-left: 0.5em;
+    font-size: 1rem;
+    font-family: monospace;
+    word-wrap: break-word;
+    white-space: pre-line
+}
+.content-link {
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+.code {
+    margin: 1em;
+    white-space: pre-wrap;
+    padding: 1em;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+/*
+    Footer shit
+*/
+.footer {
+    display: flex;
+    width: 100%;
+    margin: auto;
+}
+.footer-text {
+ 	font-family: monospace;
+    font-size: 1em;
+    margin: 1em;
+}
+/*
+    images
+*/
+.image {
+	opacity: 1;
+	width: 100%;
+    height: auto;
+}
+.image-post {
+    display: flex;
+    margin: auto;
+    border-radius: 5px;
+}
+/*
+    Mobile-friendly stuff
+*/
+@media (max-width: 750px) {
+	.main {
+		display: flex;
+        flex-direction: column;
+		width: 95%;
+	}
+
+	.grid-content {
+		grid-template-columns: 100%;
+	}
+	.main > .left-bar, .center-top, .center-bottom {
+		margin: 0.2em;
+	}
+    .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .header-content {
+        margin: 0.3em;
+        font-size: 2rem;
+    }
+    .code {
+        font-size: 1rem;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        overflow: scroll;
+    }
+    .footer {
+        grid-template-columns: 1fr
+    }
+    .image-post {
+        width: 80%;
+    }
+}
+@media (min-width: 751px) and (max-width: 1099px) {
+	.main {
+		width: 90%;
+	}
+	.grid-content {
+        grid-template-columns: 100%;
+	}
+	.main > .left-bar, .center-top, .center-bottom {
+		margin: 0.3em;
+	}
+    .header {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .header-content {
+        font-size: 1.3em;
+    }
+    .footer {
+        grid-template-columns: 1fr
+    }
+    .image-post {
+        width: 65%;
+    }
+}
+@media (min-width: 1100px) and (max-width: 1400px) {
+	.main {
+		width: 80%;
+	}
+	.grid-content {
+		grid-template-columns: 100%;
+	}
+    .header {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .footer {
+        grid-template-columns: 1fr
+    }
+    .image-post {
+        width: 50%;
+    }
+}
+@media screen and (max-width: 750px) {
+    .menu {
+        display: none;
+    }
+    .menu_side {
+        margin: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        list-style: none;
+        overflow: hidden;
+        overflow-x: hidden; 
+        overflow-y: auto;
+    }
+    .name-menu {
+        display: inline;
+        position: absolute;
+        margin-left: 2em;
+    }
+    .items {
+        margin-top: 0.2em;
+        font-size: 1.2rem;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 15%
+    }
+    .bar1,
+    .bar2,
+    .bar3 {
+        position: relative;
+        margin: 0.2em;
+        width: 35px;
+        height: 5px;
+        transition: 0.4s;
+    }
+    .placement .bar1,
+    .placement .bar2,
+    .placement .bar3 {
+        position: absolute;
+        top: 2em;
+        right: 2em;
+        margin: 0.2em;
+        z-index: 1;
+    }
+    .placement .bar1 {
+        transform: rotate(45deg)
+    }
+    .placement .bar2 {
+        display: none
+    }
+    .placement .bar3 {
+        transform: rotate(-45deg)
+    }
+}
