@@ -52,7 +52,7 @@ if($_SESSION['user'] == null){
                                      "/(\bint|\bstr|\bchar|\blong|\bString|\bbyte)/",
                                      "/(\".*\")/",
                                      "/([0-9])/",
-                                     "/\[link\](.*?)\:(.*?)\[\/link\]/"];
+                                     "/\[link\](.*)\:(.*)\[\/link\]/"];
                             $content = preg_replace($find, $replace, $content);
                             enter_content($conn, $date, $title, $image, $content, $category);
                         }
