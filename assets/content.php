@@ -52,7 +52,8 @@ function getPostsLatest($conn, $amnt) {
         } else {
             echo '<img class="image-post" src="data:/png;base64,'.base64_encode( $row['postimage'] ).'"/>';
         }        echo "<div class='content'>";
-        echo implode(' ', array_slice(explode(' ', $row['content']), 0, 40))."... ";
+        //echo implode(' ', array_slice(explode(' ', $row['content']), 0, 40))."... ";
+        echo $row['content'];
         echo "<a class='content-link' href=".$row['category'].".php>";
         echo "Read more...</a>";
         echo "</div>";

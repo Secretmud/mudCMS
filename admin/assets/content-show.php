@@ -5,6 +5,7 @@ function last_post_title($conn) {
     $title = $post_title->fetch(PDO::FETCH_ASSOC);
     return $title;
 }
+
 function total_posts($conn) {
     $total_posts = $conn->prepare('SELECT id FROM content');
     $total_posts->execute();

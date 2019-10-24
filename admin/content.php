@@ -3,9 +3,6 @@ session_start();
 if($_SESSION['user'] == null){
     header("Location: login.php");
 }
-include_once 'assets/connection.php';
-include_once 'assets/sales.php';
-include_once 'assets/data.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,10 +29,16 @@ include_once 'assets/data.php';
                             <input type="submit" value="submit" name="submit">
                         </form>
                         <?php
+                        ini_set('display_errors', 1);
+                        ini_set('display_startup_errors', 1);
+                        error_reporting(E_ALL);
                         if(isset($_POST["submit"])) {
+                            include('assets/connection.php');
+                            require('assets/data.php');
                             $content = $_POST["content"];
-                            $content = htmlspecialchars($content, ENT_QUOTES);
+                            $content = htmlspecialchars($content);
                             $title = $_POST["title"];
+                            $date = date("Ymd");
                             $image = $_POST["postimage"];
                             $category = $_POST["category"];
                             $replace = ["<div class='code'>$1</div>",
@@ -51,9 +54,7 @@ include_once 'assets/data.php';
                                      "/([0-9])/",
                                      "/\[link\](.*?)\:(.*?)\[\/link\]/"];
                             $content = preg_replace($find, $replace, $content);
-
-                            var_dump($content);
-                            enter_content($conn, $title, $image, $category, $content);
+                            enter_content($conn, $date, $title, $image, $content, $category);
                         }
                         ?>
 					</div>

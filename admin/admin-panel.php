@@ -3,7 +3,6 @@ session_start();
 if($_SESSION['user'] == null){
     header("Location: login.php");
 }
-include_once 'assets/connection.php';
 include_once 'assets/sales.php';
 ?>
 <!DOCTYPE html>
@@ -20,7 +19,9 @@ include_once 'assets/sales.php';
                 <div class="grid-content">
 					<div class="content">
                         <h3>Post history:</h3>
-                        <?php 
+                        <?php
+                        include('assets/connection.php');
+                        include('assets/content-show.php');
                         echo "Last post: ".last_post_title($conn)['title']."<br>";
                         echo "Totalt: ".total_posts($conn)."<br>";
                         ?>
