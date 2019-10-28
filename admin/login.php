@@ -22,21 +22,21 @@ ob_start();
         <?php 
             require_once 'assets/connection.php';
             if(!empty($_POST['email']) && !empty($_POST['password'])){
-                //$password = $_POST['password'];
-                //$check = $conn->prepare('SELECT id, email, pass, rights FROM users WHERE email = :email');
-                //$check->bindParam(':email', $_POST['email']);
-                //$check->execute();
-                //$results = $check->fetch(PDO::FETCH_ASSOC);
-                //if(password_verify($password, $results['pass'])){
+                $password = $_POST['password'];
+                $check = $conn->prepare('SELECT id, email, pass, rights FROM users WHERE email = :email');
+                $check->bindParam(':email', $_POST['email']);
+                $check->execute();
+                $results = $check->fetch(PDO::FETCH_ASSOC);
+                if(password_verify($password, $results['pass'])){
                     $_SESSION['user'] = $_POST['email'];
                     $_SESSION['rights'] = 'admin';
-                    //$_SESSION['user'] = $results['email'];
-                    //$_SESSION['rights'] = $results['rights'];
+                    $_SESSION['user'] = $results['email'];
+                    $_SESSION['rights'] = $results['rights'];
                     echo "<script>console.log( 'Debug Objects: " . $_SESSION['user'] . " ". $_SESSION['rights']. "' );</script>";
                     header('Location: adminPanel.php');
-                //} else {
-                //    echo "Wrong password and/or username";
-                //}
+                } else {
+                    echo "Wrong password and/or username";
+                }
             }
         ?>
     </div>

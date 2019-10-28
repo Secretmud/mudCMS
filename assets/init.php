@@ -29,9 +29,10 @@ class StartCheck {
             email VARCHAR(255),
             reg_date TIMESTAMP)');
         $test->execute();
+        $this->insertUserData();
     }
 
-    public function insertUserData() {
+    private function insertUserData() {
         echo "<form id='register-form' method='post'>
                 <input class='register-form-input' name='username' placeholder='username' type='text'>
                 <input class='register-form-input' name='email' placeholder='email' type='text'>
@@ -41,14 +42,22 @@ class StartCheck {
               </form>";
         if (isset($_POST['submit'])) {
             if ($_POST['pass1'] == $_POST['pass2']) {
-                register("","","");
+                $this->register($_POST["username"],$_POST["pass1"],$_POST["email"]);
             } else {
                 echo "<script>alert('Password mismatch!')</script>";
             }
         }
     }
 
-    public function register($uname, $pass, $email) {
-        echo "Good job";   
+    private function register($uname, $pass, $email) {
+        try {
+            $password = password_hash($pass, PASSWORD_ARGON2I, ['memory_cost' => 2048, 'time_cost' => 4, 'threads' => 3]);
+            $creatUser = $this->conn->prepare("INSERT INTO users(username, pass, email, rights) VALUES (:username, :pass, :email, :rights)");
+            $creatUser->execute([":username" => $uname, ":pass" => $password, ":email" => $email, ":rights" => "admin"]);
+            echo "done";
+        } catch (Exception $e) {
+            echo "Exception -> ".$e;
+        }
+        header("Location: admin/login.php");
     }
 }

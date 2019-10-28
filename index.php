@@ -14,5 +14,4 @@
         header("Location: page_view.php");
     } else {
         $start->tableCreate();
-        $start->insertUserData();
     }
