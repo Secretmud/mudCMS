@@ -12,5 +12,5 @@ if ($conn->exec('SELECT * FROM users LIMIT 1')) {
                             email VARCHAR(255),
                             reg_date TIMESTAMP)');
     $test->execute();
-    include_once 'assets/form.php';
+    include('assets/form.php');
 }
