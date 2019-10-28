@@ -8,17 +8,19 @@
 
 An example of the article API return JSON
 ```JSON
-'article': {
-    'title': 'Example title',
-    'poster': 'Example user',
-    'postdate': 20191001, 
-    'category': 'Example category',
-    'content': {
-        'summary': 'A small portion of the overall data',
-        'text': 'lots of text',
-        'code': 'code',
-        'image': 'images'
+{
+  "article": {
+    "title": "Example title",
+    "poster": "Example user",
+    "postdate": 20191001,
+    "category": "Example category",
+    "content": {
+      "summary": "A small portion of the overall data",
+      "text": "lots of text",
+      "code": "code",
+      "image": "images"
     }
+  }
 }
 ```
 
