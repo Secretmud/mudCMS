@@ -33,7 +33,7 @@ ob_start();
                     //$_SESSION['user'] = $results['email'];
                     //$_SESSION['rights'] = $results['rights'];
                     echo "<script>console.log( 'Debug Objects: " . $_SESSION['user'] . " ". $_SESSION['rights']. "' );</script>";
-                    header('Location: admin-panel.php');
+                    header('Location: adminPanel.php');
                 //} else {
                 //    echo "Wrong password and/or username";
                 //}
