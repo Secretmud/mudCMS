@@ -40,7 +40,7 @@ function getPostsLatest($conn, $amnt) {
         echo $row['poster']."<br>".$row['postdate']."<br>".$row['category'];
         echo "</div>";
         echo implode(' ', array_slice(explode(' ', $row['content']), 0, 40))."... ";
-        echo "<a class='content-link' href='content.php?category=".$row['category']."'.>";
+        echo "<a class='content-link' href='content.php?category=".$row['category']."&contentId=".$row['id']."'.>";
         echo "Read more...</a>";
         echo "</div>";
         echo "</div>";
