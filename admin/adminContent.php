@@ -29,32 +29,19 @@ if($_SESSION['user'] == null){
                             <input type="submit" value="submit" name="submit">
                         </form>
                         <?php
-                        ini_set('display_errors', 1);
-                        ini_set('display_startup_errors', 1);
-                        error_reporting(E_ALL);
                         if(isset($_POST["submit"])) {
-                            include('assets/connection.php');
-                            require('assets/data.php');
+                            require("../assets/connection.php");
+                            include("assets/data.php");
+                            include("assets/contentHandler.php");
+                            $ch = new contentHandler($conn);
                             $content = $_POST["content"];
                             $content = htmlspecialchars($content);
                             $title = $_POST["title"];
                             $date = date("Ymd");
                             $image = $_POST["postimage"];
                             $category = $_POST["category"];
-                            $replace = ["<div class='code'>$1</div>",
-                                        "<span class='function'>$1(<span class='var'>$2</span>)</span>",
-                                        "<span class='type'>$1</span>",
-                                        "<span class='msg'>$1</span>",
-                                        "<span class='numb'>$1</span>",
-                                        "<a class='link' href='$1'>$2</a>"];
-                            $find = ["/\[code](.*?)\[\/code\]/s",
-                                     "/([a-zA-Z0-9_-]*)\((.*)\)/",
-                                     "/(\bint|\bstr|\bchar|\blong|\bString|\bbyte)/",
-                                     "/(\".*\")/",
-                                     "/([0-9])/",
-                                     "/\[link\](.*)\:(.*)\[\/link\]/"];
-                            $content = preg_replace($find, $replace, $content);
-                            enter_content($conn, $date, $title, $image, $content, $category);
+                            $content = $ch->contentParser($content);
+                            enter_content(dbConnection(), $date, $title, $image, $content, $category);
                         }
                         ?>
 					</div>

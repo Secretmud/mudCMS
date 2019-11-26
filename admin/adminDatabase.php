@@ -3,7 +3,7 @@ session_start();
 if($_SESSION['user'] == null){
     header("Location: login.php");
 }
-include_once 'assets/connection.php';
+require('/assets/connection.php');
 include_once 'assets/sales.php';
 ?>
 <!DOCTYPE html>

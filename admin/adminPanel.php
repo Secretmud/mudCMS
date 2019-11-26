@@ -20,10 +20,10 @@ include_once 'assets/sales.php';
 					<div class="content">
                         <h3>Post history:</h3>
                         <?php
-                        include('assets/connection.php');
+                        require('../assets/connection.php');
                         include('assets/content-show.php');
-                        echo "Last post: ".last_post_title($conn)['title']."<br>";
-                        echo "Totalt: ".total_posts($conn)."<br>";
+                        echo "Last post: ".last_post_title(dbConnection())['title']."<br>";
+                        echo "Totalt: ".total_posts(dbConnection())."<br>";
                         ?>
 					</div>
 				</div>

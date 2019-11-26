@@ -9,17 +9,17 @@ function getPostsCat($conn, $cat) {
         header('Location: 404page.php');
     }
     while($row = $posts->fetch()) {
-        echo "<div class='content'>";
-        echo "<div class='content-title'>";
-        echo $row['title'];
-        echo "</div>";
-        echo "<div class='content-info'>";
-        echo $row['poster']."<br>".$row['postdate'];
-        echo "</div>";
-        echo "<div class='content'>";
-        echo $row['content'];
-        echo "</div>";
-        echo "</div>";
+        echo "<div class='content'>
+                  <div class='content-title'>
+                  ".$row['title']."
+                  </div>
+                  <div class='content-info'>
+                      ".$row['poster']."<br>".$row['postdate']."
+                  </div>
+                  <div class='content'>
+                      ".$row['content']."
+                  </div>
+              </div>";
     }
 }
 
@@ -27,22 +27,19 @@ function getPostsCat($conn, $cat) {
 function getPostsLatest($conn, $amnt) {
     $posts = $conn->prepare('SELECT * 
                              FROM content 
-                             ORDER BY postdate 
+                             ORDER BY id 
                              DESC LIMIT :amnt');
     $posts->bindValue(':amnt', $amnt, PDO::PARAM_INT);
     $posts->execute();
     while($row = $posts->fetch()) {
-        echo "<div class='content'>";
-        echo "<div class='content-title'>";
-        echo $row['title'];
-        echo "</div>";
-        echo "<div class='content-info'>";
-        echo $row['poster']."<br>".$row['postdate']."<br>".$row['category'];
-        echo "</div>";
-        echo implode(' ', array_slice(explode(' ', $row['content']), 0, 40))."... ";
-        echo "<a class='content-link' href='content.php?category=".$row['category']."&contentId=".$row['id']."'.>";
-        echo "Read more...</a>";
-        echo "</div>";
-        echo "</div>";
+        echo "<div class='content'>
+                <div class='content-title'>
+                    ".$row['title']."
+                </div>
+                <div class='content-info'>
+                    ".$row['poster']."<br>".$row['postdate']."<br>".$row['category']."
+                    </div>".$row['content']."
+                    <a class='content-link' href='content.php?category=".$row['category']."&contentId=".$row['id']."'.>Read more...</a>
+                </div>";
     }
 }

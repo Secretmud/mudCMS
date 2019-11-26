@@ -1,10 +1,9 @@
 document.getElementById("burgerMenu").addEventListener("click", toggleMenu);
+const burger = document.getElementById("burgerMenu");
 
 function toggleMenu() {
-    var menu = document.getElementById("menu");
-    var burger = document.getElementById("burgerMenu");
-    menu.classList.toggle("menu");
-    menu.classList.toggle("menu_side");
+    burger.classList.toggle("menu");
+    burger.classList.toggle("menu_side");
     burger.classList.toggle("placement");
 }
 

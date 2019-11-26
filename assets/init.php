@@ -22,6 +22,20 @@ class StartCheck {
     }
 
     public function tableCreate() {
+        $dataBaseInit = ['CREATE TABLE IF NOT EXISTS users (
+                            id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                            username VARCHAR(255) NOT NULL,
+                            pass VARCHAR(255) NOT NULL,
+                            email VARCHAR(255),
+                            reg_date TIMESTAMP)',
+                        'CREATE TABLE IF NOT EXISTS users (
+                            id INT(255) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                            content TEXT NOT NULL,
+                            postdate TIMESTAMP,
+                            poster FOREIGN KEY,
+                            category varchar(255) NOT NULL',
+                        ];
+
         $test = $this->conn->prepare('CREATE TABLE IF NOT EXISTS users (
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             username VARCHAR(255) NOT NULL,
@@ -51,7 +65,7 @@ class StartCheck {
 
     private function register($uname, $pass, $email) {
         try {
-            $password = password_hash($pass, PASSWORD_ARGON2I, ['memory_cost' => 2048, 'time_cost' => 4, 'threads' => 3]);
+            $password = password_hash($pass, PASSWORD_DEFAULT);
             $creatUser = $this->conn->prepare("INSERT INTO users(username, pass, email, rights) VALUES (:username, :pass, :email, :rights)");
             $creatUser->execute([":username" => $uname, ":pass" => $password, ":email" => $email, ":rights" => "admin"]);
             echo "done";

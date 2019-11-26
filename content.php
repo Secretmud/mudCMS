@@ -19,7 +19,7 @@
                         include_once('assets/content.php');
                         $cat = $_GET['category'];
                         $id = $_GET['id'];
-                        getPostsCat($conn, $cat);
+                        getPostsCat(dbConnection(), $cat);
                     ?>
                 </div>
             </div>

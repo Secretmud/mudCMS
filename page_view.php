@@ -16,7 +16,7 @@
                 <div class="grid-content">
                     <?php
                         include("assets/connection.php");
-                        include('assets/content.php');
+                        include("assets/content.php");
                         $conn = dbConnection();
                         $amnt = 6;
                         getPostsLatest($conn, $amnt);
@@ -31,4 +31,3 @@
         </div>
     </body>
 </html>
-
