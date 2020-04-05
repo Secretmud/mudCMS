@@ -38,7 +38,8 @@ if($_SESSION['user'] == null){
                             $content = htmlspecialchars($content);
                             $title = $_POST["title"];
                             $date = date("Ymd");
-                            $image = $_POST["postimage"];
+                            $image = addslashes(file_get_contents($_FILES['postimage']['tmp_name']));
+                            echo $image;
                             $category = $_POST["category"];
                             $content = $ch->contentParser($content);
                             enter_content(dbConnection(), $date, $title, $image, $content, $category);

@@ -3,7 +3,6 @@ session_start();
 if($_SESSION['user'] == null){
     header("Location: login.php");
 }
-require('/assets/connection.php');
 include_once 'assets/sales.php';
 ?>
 <!DOCTYPE html>
@@ -19,6 +18,12 @@ include_once 'assets/sales.php';
             <div class="center-top">
                 <div class="grid-content">
 					<div class="content">
+                        <h3>Posts:</h3>
+                        <?php
+                        require('../assets/connection.php');
+                        include('assets/content-show.php');
+                        
+                        ?>
 					</div>
 				</div>
             </div>

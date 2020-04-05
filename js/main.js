@@ -7,7 +7,7 @@ function toggleMenu() {
     burger.classList.toggle("placement");
 }
 
-/*document.getElementById("style-picker").addEventListener("click", function(){
+document.getElementById("style-picker").addEventListener("click", function(){
     var selected = this.options[this.selectedIndex].value;
     var color = localStorage.setItem("scheme", JSON.stringify(selected));
     var datarecived = localStorage.getItem('scheme');
@@ -22,8 +22,6 @@ function toggleMenu() {
 });
 
 var css_file = "css/colorscheme/dark.css";
-
-
 
 function setStyleSource (linkID, sourceLoc) {
     var theLink = document.getElementById(linkID);
@@ -43,4 +41,4 @@ function setColor() {
         setStyleSource("color", JSON.parse(datarecived));
         console.log("State2:", JSON.parse(datarecived));
     }
-}*/
+}

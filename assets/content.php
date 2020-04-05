@@ -13,6 +13,7 @@ function getPostsCat($conn, $cat) {
                   <div class='content-title'>
                   ".$row['title']."
                   </div>
+                  <img src=".$row['postimage']."></img>
                   <div class='content-info'>
                       ".$row['poster']."<br>".$row['postdate']."
                   </div>

@@ -114,9 +114,11 @@ a:hover {
     grid-positioning, it's the easiest way of getting the layout you want
 */
 .left-bar {
+    box-shadow: 1px 1px 1px black;
     position: absolute;
-    left: 15px;
-    top: 15px;
+    left: 0px;
+    top: 0px;
+    padding: 1em;
     width: 20%;
     height: 100%;
     background: white;
@@ -239,6 +241,11 @@ a:hover {
 }
 .items:nth-child(1n) {
     border-right: 1px solid black;
+}
+
+div.header:nth-child(3) {
+    position: absolute;
+    top: 90vh;
 }
 
 @media (max-width: 750px) {
