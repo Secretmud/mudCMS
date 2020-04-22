@@ -18,7 +18,7 @@
                         include_once('assets/connection.php');
                         include_once('assets/content.php');
                         $cat = $_GET['category'];
-                        $id = $_GET['id'];
+                        $id = $_GET['contentId'];
                         getPostsCat(dbConnection(), $cat);
                     ?>
                 </div>

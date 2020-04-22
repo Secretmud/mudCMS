@@ -1,9 +1,11 @@
 <?php 
-session_start();
+if(!isset($_SESSION)) {
+    session_start();
+}
+ob_start();
 if($_SESSION['user'] == null){
     header("Location: login.php");
 }
-include_once 'assets/sales.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +24,13 @@ include_once 'assets/sales.php';
                         <?php
                         require('../assets/connection.php');
                         include('assets/content-show.php');
-                        
+                        $conn = dbConnection();
+                        echo "Last post title: ";
+                        echo ucfirst(last_post_title($conn)['title']);
+                        echo "<br>Total posts: ";
+                        echo total_posts($conn);
+                        echo "<br>Most popular category: ";
+                        echo ucfirst(cat_pop($conn)['category']);
                         ?>
 					</div>
 				</div>

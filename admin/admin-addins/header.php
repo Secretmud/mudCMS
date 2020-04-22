@@ -1,13 +1,13 @@
 <div class="header header-space">
-Velkommen: <?php echo $_SESSION['user'];?><br>
-Privilegier: <?php echo $_SESSION['rights'];?><br>
+Welcome: <?php echo $_SESSION['user'];?><br>
+Rights: <?php echo $_SESSION['rights'];?><br>
 </div>
 <?php
 if($_SESSION['rights'] == 'admin'){
     echo '<div class="header header-space">
         <div class="header-content">
             <i class="fal fa-home"></i>
-            <a class="" href="adminPanel.php">Hjem</a>
+            <a class="" href="adminPanel.php">Dashboard</a>
         </div>
         <div class="header-content">
             <i class="fal fa-database"></i>
@@ -15,7 +15,10 @@ if($_SESSION['rights'] == 'admin'){
             <div class="">
                 <ul class="list">
                     <li class="list-item">
-                        <a href="adminContent.php">Add content</a>
+                        <a href="makeContent.php">Add content</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="editContnt.php">Edit content</a>
                     </li>
                 </ul>
             </div>
@@ -25,5 +28,5 @@ if($_SESSION['rights'] == 'admin'){
 }
 ?>
 <div class="header header-space">
-    <a href="logout.php">Logg ut!</a>
+    <a href="logout.php" onClick="alert('Are you sure you want to logout?')">Sign out!</a>
 </div>

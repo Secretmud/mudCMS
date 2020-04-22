@@ -1,5 +1,8 @@
 <?php 
-session_start();
+if(!isset($_SESSION)) {
+    session_start();
+}
+ob_start();
 if($_SESSION['user'] == null){
     header("Location: login.php");
 }
@@ -11,7 +14,7 @@ if($_SESSION['user'] == null){
 		<div class="main">
             <div class="left-bar">
                 <div class="content">
-                    <?php include 'admin-addins/header.php'; ?>
+                    <?php include('admin-addins/header.php'); ?>
                 </div>
             </div>
             <div class="center-top">
@@ -33,7 +36,7 @@ if($_SESSION['user'] == null){
                             require("../assets/connection.php");
                             include("assets/data.php");
                             include("assets/contentHandler.php");
-                            $ch = new contentHandler($conn);
+                            $ch = new contentHandler(dbConnection());
                             $content = $_POST["content"];
                             $content = htmlspecialchars($content);
                             $title = $_POST["title"];
@@ -50,7 +53,7 @@ if($_SESSION['user'] == null){
             </div>
             <div class="center-bottom">
                 <div class="content">
-                    <?php include 'admin-addins/footer.php';?>
+                    <?php include('admin-addins/footer.php');?>
                 </div>
             </div>
         </div>
