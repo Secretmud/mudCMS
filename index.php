@@ -5,11 +5,11 @@ error_reporting(-1);
 require('assets/connection.php');
 include("assets/init.php");
 $conn = dbConnection();
-$start = new StartCheck($conn, "blog");
+$start = new StartCheck($conn);
 $anyUser = $start->dataBaseCheck();
 
 if ($anyUser === true) {
     header("Location: page_view.php");
 } else {
-    $start->tableCreate();
+    $start->writeConfig();
 }

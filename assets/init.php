@@ -5,20 +5,12 @@ class StartCheck {
     private $conn;
     private $table;
 
-    function __construct(\PDO $conn, String $table) {
+    function __construct(\PDO $conn) {
         $this->conn = $conn;
-        $this->table = $table;
     }
 
     public function dataBaseCheck() {
-        $checkIfExists = $this->conn->prepare("SELECT 1 FROM users");
-        $checkIfExists->execute();
-        if ($checkIfExists->rowCount() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-
+        return (file_get_contents("conf/config.php")) ? true : false;
     }
 
     public function tableCreate() {
@@ -73,5 +65,30 @@ class StartCheck {
             echo "Exception -> ".$e;
         }
         header("Location: admin/login.php");
+    }
+
+    public function writeConfig() {
+        echo "<form id='register-form' method='post'>
+                <h1 style='margin: atuo;'>Setup</h1>
+                <input class='register-form-input' name='username' placeholder='username' type='text'>
+                <input class='register-form-input' name='database' placeholder='database' type='text'>
+                <input class='register-form-input' name='pass1' placeholder='pass' type='password'>
+                <input class='register-form-input' type='submit' placeholder='submit' name='submit' value='register'>
+              </form>";
+        if (isset($_POST['submit'])) {     
+            $settings = [
+                         "<?php",
+                         "\$username \"".$_POST['username']."\";",
+                         "\$database \"".$_POST['database']."\";",
+                         "\$pass \"".$_POST['pass1']."\";"
+                        ];  
+            $file = fopen("assets/conf/config.php", "w+");
+            foreach ($settings as $i) {
+                fwrite($file, $i."\n");
+            }
+            fclose($file);
+            sleep(2);
+            $this->tableCreate();
+        }
     }
 }
