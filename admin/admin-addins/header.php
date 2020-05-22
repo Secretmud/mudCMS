@@ -23,7 +23,6 @@ if($_SESSION['rights'] == 'admin'){
                 </ul>
             </div>
         </div>
-       
     </div>';
 }
 ?>

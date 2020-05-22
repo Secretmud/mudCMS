@@ -2,32 +2,14 @@
 
 
 class StartCheck {
-    private $conn;
     private $table;
-
-    function __construct(\PDO $conn) {
-        $this->conn = $conn;
-    }
+    private $conn;
 
     public function dataBaseCheck() {
-        return (file_get_contents("conf/config.php")) ? true : false;
+        return (file_get_contents("assets/conf/config.php")) ? true : false;
     }
 
     public function tableCreate() {
-        $dataBaseInit = ['CREATE TABLE IF NOT EXISTS users (
-                            id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                            username VARCHAR(255) NOT NULL,
-                            pass VARCHAR(255) NOT NULL,
-                            email VARCHAR(255),
-                            reg_date TIMESTAMP)',
-                        'CREATE TABLE IF NOT EXISTS users (
-                            id INT(255) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                            content TEXT NOT NULL,
-                            postdate TIMESTAMP,
-                            poster FOREIGN KEY,
-                            category varchar(255) NOT NULL',
-                        ];
-
         $test = $this->conn->prepare('CREATE TABLE IF NOT EXISTS users (
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             username VARCHAR(255) NOT NULL,
@@ -72,15 +54,17 @@ class StartCheck {
                 <h1 style='margin: atuo;'>Setup</h1>
                 <input class='register-form-input' name='username' placeholder='username' type='text'>
                 <input class='register-form-input' name='database' placeholder='database' type='text'>
-                <input class='register-form-input' name='pass1' placeholder='pass' type='password'>
+                <input class='register-form-input' name='dbpass' placeholder='pass' type='password'>
+                <input class='register-form-input' name='host' placeholder='127.0.0.1' type='text'>
                 <input class='register-form-input' type='submit' placeholder='submit' name='submit' value='register'>
               </form>";
         if (isset($_POST['submit'])) {     
             $settings = [
                          "<?php",
-                         "\$username \"".$_POST['username']."\";",
-                         "\$database \"".$_POST['database']."\";",
-                         "\$pass \"".$_POST['pass1']."\";"
+                         "\$username = \"".$_POST['username']."\";",
+                         "\$database = \"".$_POST['database']."\";",
+                         "\$pass = \"".$_POST['dbpass']."\";",
+                         "\$host = \"".$_POST['host']."\";"
                         ];  
             $file = fopen("assets/conf/config.php", "w+");
             foreach ($settings as $i) {
@@ -88,6 +72,8 @@ class StartCheck {
             }
             fclose($file);
             sleep(2);
+            include("assets/conf/config.php");
+            $this->conn = dbConnection();
             $this->tableCreate();
         }
     }
