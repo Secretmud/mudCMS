@@ -9,6 +9,13 @@ class StartCheck {
         return (file_get_contents("assets/conf/config.php")) ? true : false;
     }
 
+    public function databaseCreate() {
+        include('assets/conf/config.php');
+        $test = $this->conn->prepare('CREATE DATABASE IF NOT EXISTS ?');
+        $test->execute();
+        $this->insertUserData();
+    }
+
     public function tableCreate() {
         $test = $this->conn->prepare('CREATE TABLE IF NOT EXISTS users (
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
