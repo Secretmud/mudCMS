@@ -23,20 +23,20 @@ ob_start();
             include "../assets/connection.php";
             $conn = dbConnection();
             if(!empty($_POST['email']) && !empty($_POST['password'])){
-                //$password = $_POST['password'];
-                //$check = $conn->prepare('SELECT * FROM users WHERE email = :email');
-                //$check->execute([':email' => $_POST['email']]);
-                //$results = $check->fetch(PDO::FETCH_ASSOC);
-                //if(password_verify($password, $results['pass'])){
-                    //$_SESSION['user'] = $results['username'];
-                    //$_SESSION['rights'] = $results['rights'];
+                $password = $_POST['password'];
+                $check = $conn->prepare('SELECT * FROM users WHERE email = :email');
+                $check->execute([':email' => $_POST['email']]);
+                $results = $check->fetch(PDO::FETCH_ASSOC);
+                if(password_verify($password, $results['pass'])){
+                    $_SESSION['user'] = $results['username'];
+                    $_SESSION['rights'] = $results['rights'];
                     $_SESSION['user'] = "tete";
                     $_SESSION['rights'] = "admin";
                     echo "<script>console.log( 'Debug Objects: " . $_SESSION['user'] . " ". $_SESSION['rights']. "' );</script>";
                     header('Location: adminPanel.php');
-                //} else {
-                //    echo "Wrong password and/or username";
-                //}
+                } else {
+                    echo "Wrong password and/or username";
+                }
             }
         ?>
     </div>

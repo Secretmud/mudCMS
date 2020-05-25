@@ -17,7 +17,8 @@
                         <a href="login.php">Log in</a>
 					</div>
 					<?php
-						print_r($_SESSION);
+						$json_string = json_encode($_SERVER, JSON_PRETTY_PRINT);
+						echo $json_string;
 					?>
 				</div>
             </div>
