@@ -1,20 +1,31 @@
 # mudCMS
 
+When you start up the website for the first time, it will prompt you to connect to the database and have you fill in the name and password of the user that will be accessing said database.
 
-the following must be added to two places
-    - /assets/connection.php
-    - /admin/assets/connection.php
+
+## Information 
+
+The configuration file that is used to access the database is placed here:
+
+- assets
+    - conf
+        - config.php
+        
+If you end up creating something that needs database connection, use the following function:
 ```php
 <?php
-$db_host = "";
-$db_name = "";
-$db_user = "";
-$db_pass = "";
 
-try {
-    $conn = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
-} catch(PDOException $e) {
-    echo "Connection failed: " .$e->getMessage();
+function dbConnection() { 
+    static $connection;
+    if(!isset($connection)) {
+        include('conf/config.php');
+        try {
+            $connection = new PDO("mysql:host=$host;dbname=$database", $username, $pass);
+        } catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+    return $connection;
 }
 ```
 
