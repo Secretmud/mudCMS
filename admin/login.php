@@ -27,6 +27,13 @@ ob_start();
                 $check = $conn->prepare('SELECT * FROM users WHERE email = :email');
                 $check->execute([':email' => $_POST['email']]);
                 $results = $check->fetch(PDO::FETCH_ASSOC);
+                
+                echo "<br>";
+                echo password_get_info($results['pass']);
+                echo "<br>";
+                echo password_get_info(password_hash($password, PASSWORD_DEFAULT));
+                echo "<br>";
+
                 if(password_verify($password, $results['pass'])){
                     $_SESSION['user'] = $results['username'];
                     $_SESSION['rights'] = $results['rights'];

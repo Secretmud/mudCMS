@@ -15,15 +15,11 @@
             <div class="center-top">
                 <div class="grid-content">
                     <?php
-                    //    include_once('assets/connection.php');
-                    //    include_once('assets/content.php');
-                    //    $cat = $_GET['category'];
-                    //    $id = $_GET['contentId'];
-                    //    getPostsCat(dbConnection(), $cat);
-                    include("assets/init.php");
-                    include("assets/connection.php");
-                    $start = new StartCheck(dbConnection(), "blog");
-                    $start->writeConfig();
+                    include_once('assets/connection.php');
+                    include_once('assets/content.php');
+                    $cat = $_GET['category'];
+                    $id = $_GET['contentId'];
+                    getPostsCat(dbConnection(), $cat);
                     ?>
                 </div>
             </div>
