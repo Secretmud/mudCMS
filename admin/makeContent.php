@@ -25,9 +25,7 @@ if($_SESSION['user'] == null){
                             <input type="text" name="title" placeholder="title" required> <br>
                             <input type="file" name="postimage" placeholder="postimage" ><br>
                             <input type="text" name="category" placeholder="category" required><br>
-                            <input type="button" value="code" id="code">
-                            <input type="button" value="link" id="link">
-                            <input type="button" value="test" id="test">
+                            
                             <textarea required placeholder="content" name="content" id="contentBox" style="height: 300px; width: 100%; resize: none;"></textarea>
                             <input type="submit" value="submit" name="submit">
                         </form>
@@ -41,8 +39,8 @@ if($_SESSION['user'] == null){
                             $content = htmlspecialchars($content);
                             $title = $_POST["title"];
                             $date = date("Ymd");
-                            $image = addslashes(file_get_contents($_FILES['postimage']['tmp_name']));
-                            echo $image;
+                            //$image = addslashes(file_get_contents($_FILES['postimage']['tmp_name']));
+                            //echo $image;
                             $category = $_POST["category"];
                             $content = $ch->contentParser($content);
                             enter_content(dbConnection(), $date, $title, $image, $content, $category);

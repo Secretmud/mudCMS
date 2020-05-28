@@ -36,3 +36,24 @@ This is an modal example:
     https://jsfiddle.net/secretmud/kosex7bv/36/
 
 The end product will look like a simplified file manager, considering creating a series of file data in the database so that you'll be able to search for content based on a single query. 
+
+
+## Markdown
+
+Code tag  - ~ before and after block
+Link tag  - ! url - name
+Header(s) - # easy and clean
+Citation  - >
+
+Code:
+^~(\s\S.*)
+Link:
+^!(.*?)-(.*)
+Header(s)
+^#{1,6}(.*)
+Citation
+^>(.*)
+
+```php
+test
+```

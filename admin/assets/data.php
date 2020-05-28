@@ -1,5 +1,11 @@
 <?php
-session_start();
+if(!isset($_SESSION)) {
+    session_start();
+}
+ob_start();
+if($_SESSION['user'] == null){
+    header("Location: login.php");
+}
 if($_SESSION['user'] == null) {
 	header("Location: login.php");
 }

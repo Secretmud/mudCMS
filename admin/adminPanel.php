@@ -26,6 +26,8 @@ if($_SESSION['user'] == null){
                         include('assets/content-show.php');
                         echo "Last post: ".last_post_title(dbConnection())['title']."<br>";
                         echo "Totalt: ".total_posts(dbConnection())."<br>";
+
+
                         ?>
 					</div>
 				</div>

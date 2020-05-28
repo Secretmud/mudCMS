@@ -16,10 +16,6 @@
 						<h3>Please log in</h3>
                         <a href="login.php">Log in</a>
 					</div>
-					<?php
-						$json_string = json_encode($_SERVER, JSON_PRETTY_PRINT);
-						echo $json_string;
-					?>
 				</div>
             </div>
         </div>

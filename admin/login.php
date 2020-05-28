@@ -20,25 +20,16 @@ ob_start();
             <input class="input-login" type="submit" name="confirmed" value="Logg inn"></input>
         </form>
         <?php 
-            include "../assets/connection.php";
+            require("../assets/connection.php");
             $conn = dbConnection();
             if(!empty($_POST['email']) && !empty($_POST['password'])){
                 $password = $_POST['password'];
                 $check = $conn->prepare('SELECT * FROM users WHERE email = :email');
                 $check->execute([':email' => $_POST['email']]);
                 $results = $check->fetch(PDO::FETCH_ASSOC);
-                
-                echo "<br>";
-                echo password_get_info($results['pass']);
-                echo "<br>";
-                echo password_get_info(password_hash($password, PASSWORD_DEFAULT));
-                echo "<br>";
-
                 if(password_verify($password, $results['pass'])){
                     $_SESSION['user'] = $results['username'];
                     $_SESSION['rights'] = $results['rights'];
-                    $_SESSION['user'] = "tete";
-                    $_SESSION['rights'] = "admin";
                     echo "<script>console.log( 'Debug Objects: " . $_SESSION['user'] . " ". $_SESSION['rights']. "' );</script>";
                     header('Location: adminPanel.php');
                 } else {

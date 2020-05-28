@@ -24,6 +24,29 @@ function getPostsCat($conn, $cat) {
     }
 }
 
+function getPost($conn, $id) {
+    $posts = $conn->prepare("SELECT * FROM content WHERE id=:id");
+    try {
+        $posts->bindParam(':id', $id);
+        $posts->execute();
+        
+    } catch (Exception $e) {
+        header('Location: 404page.php');
+    }
+    $row = $posts->fetch();
+    echo "<div class='content'>
+        <div class='content-title'>
+        ".$row['title']."
+        </div>
+        <img src=".$row['postimage']."></img>
+        <div class='content-info'>
+            ".$row['poster']."<br>".$row['postdate']."
+        </div>
+        <div class='content'>
+            ".$row['content']."
+        </div>
+    </div>";
+}
                         
 function getPostsLatest($conn, $amnt) {
     $posts = $conn->prepare('SELECT * 
