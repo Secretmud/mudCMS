@@ -1,6 +1,7 @@
 <?php 
 if(!isset($_SESSION)) {
     session_start();
+    $_SESSION['hit'] += 1;
 }
 ob_start();
 ?>
@@ -27,13 +28,14 @@ ob_start();
                 $check = $conn->prepare('SELECT * FROM users WHERE email = :email');
                 $check->execute([':email' => $_POST['email']]);
                 $results = $check->fetch(PDO::FETCH_ASSOC);
-                if(password_verify($password, $results['pass'])){
+                if(password_verify($password, $results['pass']) && $_SESSION['hit'] < 3){
                     $_SESSION['user'] = $results['username'];
                     $_SESSION['rights'] = $results['rights'];
-                    echo "<script>console.log( 'Debug Objects: " . $_SESSION['user'] . " ". $_SESSION['rights']. "' );</script>";
                     header('Location: adminPanel.php');
                 } else {
                     echo "Wrong password and/or username";
+                    //insertError($_SESSION['hit'], $_SESSION['REMOTE_ADDR']);
+                    echo "<br>Failed attempts ".$_SESSION['hit']."<br>";
                 }
             }
         ?>

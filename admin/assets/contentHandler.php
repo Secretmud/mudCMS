@@ -19,7 +19,7 @@ class ContentHandler {
                  "/(\".*\")/",
                  "/([0-9])/",
                  "/\[link\](.*)\:(.*)\[\/link\]/"];
-        $arr = str_split($content);
+        $arr = explode("\n", $content);
         $first = true;
         $output = "";
         $code = "";
@@ -27,7 +27,7 @@ class ContentHandler {
         $indexes = array();
         $i = 0;
         foreach ($arr as $a) {
-            if ($a === "~") {
+            if (preg_match("/~/", $a, $match)) {
                 if ($first) {
                     $a = "<div class='code'>";
                     $first = false;
@@ -40,11 +40,17 @@ class ContentHandler {
                     $i++;
                 }
             }
-            $output .= $a;
             $x++;
+            $output .= $a;
         }
+        /*
+        for ($i = 0; $i < count($indexes); $i++) {
+            for ($x = $indexes[$i]; $x < $indexes[$i + 1]; $x++) {
+                $output .= preg_replace($find, $replace, $arr[$x]);
+            }
+        }
+        */
         print_r($indexes);
-        $output = preg_replace($find, $replace, $output);
         echo $output;
         return $output;
     }
