@@ -12,7 +12,7 @@ class StartCheck {
     public function databaseCreate() {
         require("assets/conf/config.php");
         $conn = dbConnection();
-        $test = $conn->prepare('CREATE DATABASE IF NOT EXISTS ?');
+        $test = $conn->prepare('CREATE DATABASE IF NOT EXISTS mudCMS');
         $test->execute();
     }
 

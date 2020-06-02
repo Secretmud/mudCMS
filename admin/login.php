@@ -28,7 +28,7 @@ ob_start();
                 $check = $conn->prepare('SELECT * FROM users WHERE email = :email');
                 $check->execute([':email' => $_POST['email']]);
                 $results = $check->fetch(PDO::FETCH_ASSOC);
-                if(password_verify($password, $results['pass']) && $_SESSION['hit'] < 3){
+                if(password_verify($password, $results['pass']) /*&& $_SESSION['hit'] < 3*/){
                     $_SESSION['user'] = $results['username'];
                     $_SESSION['rights'] = $results['rights'];
                     header('Location: adminPanel.php');
