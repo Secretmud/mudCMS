@@ -2,8 +2,6 @@
 
 
 class StartCheck {
-    private $table;
-    private $conn;
 
     public function dataBaseCheck() {
         return (file_get_contents("assets/conf/config.php")) ? true : false;
@@ -14,6 +12,8 @@ class StartCheck {
         $conn = dbConnection();
         $test = $conn->prepare('CREATE DATABASE IF NOT EXISTS mudCMS');
         $test->execute();
+        usleep(500);
+        $conn = null;
     }
 
     public function tableCreate() {
@@ -26,7 +26,18 @@ class StartCheck {
             email VARCHAR(255),
             reg_date TIMESTAMP)');
         $test->execute();
-        usleep(2500);
+        usleep(500);
+        $test = $conn->prepare('CREATE TABLE IF NOT EXISTS posts (
+            id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            postdate DATE,
+            title varchar(255),
+            poster varchar(255),
+            content text,
+            postimage varchar(255),
+            category, varchar(255)');
+        $test->execute();
+        usleep(500);
+        $conn = null;
     }
 
     private function register($uname, $pass, $email) {
@@ -41,6 +52,7 @@ class StartCheck {
         } catch (Exception $e) {
             echo "Exception -> ".$e;
         }
+        $conn = null;
         header("Location: admin/login.php");
     }
 
@@ -66,7 +78,6 @@ class StartCheck {
             echo $_POST['cms-email'];   
             echo $_POST['pass1'];
             echo $_POST['pass2'];
-            
             $settings = [
                          "<?php",
                          "\$username = \"".$_POST['username']."\";",
@@ -79,13 +90,14 @@ class StartCheck {
                 fwrite($file, $i."\n");
             }
             fclose($file);
+            $this->databaseCreate();
+            $this->tableCreate();
             if ($_POST['pass1'] == $_POST['pass2']) {
                 $this->register($_POST["cms-user"],$_POST["pass1"],$_POST["cms-email"]);
             } else {
                 echo "<script>alert('Password mismatch!')</script>";
             }
             sleep(2);
-            $this->tableCreate();
         }
     }
 }

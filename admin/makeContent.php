@@ -27,7 +27,7 @@ $ch = new contentHandler(dbConnection());
                         <h3>Add new page content</h3>
                         <form method="POST" enctype="multipart/form-data">
                             <input type="text" name="title" placeholder="title" required> <br>
-                            <input type="file" name="postimage" placeholder="postimage" ><br>
+                            <input type="text" name="postimage" placeholder="/path/to/file" ><br>
                             <input type="text" name="category" placeholder="category" required><br>
                             <a type="submit" class="button" id="btnModal">Insert images</a>
                             <textarea required placeholder="content" name="content" id="contentBox" style="height: 300px; width: 100%; resize: none;"></textarea>
@@ -39,7 +39,7 @@ $ch = new contentHandler(dbConnection());
                             $content = htmlspecialchars($content);
                             $title = $_POST["title"];
                             $date = date("Ymd");
-                            //$image = addslashes(file_get_contents($_FILES['postimage']['tmp_name']));
+                            $image = $_POST["postimage"];
                             //echo $image;
                             $category = $_POST["category"];
                             $content = $ch->contentParser($content);

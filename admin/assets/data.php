@@ -6,9 +6,6 @@ ob_start();
 if($_SESSION['user'] == null){
     header("Location: login.php");
 }
-if($_SESSION['user'] == null) {
-	header("Location: login.php");
-}
 function enter_content($conn, $date, $title, $postimage, $content, $category) {
 	$save_data = $conn->prepare("INSERT INTO content(postdate, title, poster, content, postimage, category) 
 								 VALUES (:postdate, :title, :poster, :content, :postimage, :category)");

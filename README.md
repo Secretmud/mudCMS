@@ -28,3 +28,18 @@ function dbConnection() {
     return $connection;
 }
 ```
+This is the markdown used when posting
+
+```
+# h1
+## h2
+### h3
+
+-- citation
+
+! http://localhost/http/Blog/admin/images/gey_2.jpg : gey_2.jpg
+
+~
+$tmp = ($arr[$x] == "") ? "<div></div>" : preg_replace($find, $replace, $arr[$x]);
+~
+```
