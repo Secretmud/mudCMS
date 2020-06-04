@@ -66,7 +66,7 @@ class StartCheck {
             echo $_POST['cms-email'];   
             echo $_POST['pass1'];
             echo $_POST['pass2'];
-
+            
             $settings = [
                          "<?php",
                          "\$username = \"".$_POST['username']."\";",

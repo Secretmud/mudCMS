@@ -248,6 +248,68 @@ div.header:nth-child(3) {
     top: 90vh;
 }
 
+.imgModal {
+    display: none;
+}
+
+.displayModal {
+	z-index: 1;
+	position: fixed;
+	width: 80%;
+	height: 80vh;
+	transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    background: lightgrey;
+}
+.modalHeader {
+    position: relative;
+    width: 100%;
+    height: 10%;
+    top: -4%;
+    background-color: darkgrey;
+}
+.modalMenu {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    transform: translateY(100%);
+}
+.btnModal {
+    position: fixed;
+    top: 10.5%;
+    left: 85%;
+    z-index: 2;
+    border: 1px solid;
+    width: 20px;
+    height: 20px;
+    transform: translateX(-5px);
+    text-align: center;
+}
+.modalContent {
+    position: absolute;
+    display: grid;
+    grid-template-columns: repeat(6, auto);
+    margin: 10px;
+}
+.modalContent > * {
+    /* widht: 50px; */
+    width: auto;
+    margin: 10px;
+}
+.modalImgLoc {
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+}
+#imgLocation {
+    background: white;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px black;
+}
+
 @media (max-width: 750px) {
     .left-bar {
         position: relative;

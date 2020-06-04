@@ -22,12 +22,11 @@ class ContentHandler {
                 if ($first) {
                     $a = "<div class='code'>";
                     $first = false;
-                    $i++;
                 } else {
                     $a = "</div>";
                     $first = true;
-                    $i++;
                 }
+                $i++;
             }
             $output_tmp[$x] = $a;
             $x++;
@@ -56,5 +55,33 @@ class ContentHandler {
             $output .= $ot;
         }
         return $output;
+    }
+
+    public function displayImg() {
+        $images = 'images';
+        $files = scandir("images/");
+        for ($i = 2; $i < count($files); $i++) {
+            echo "<img id='imgsrc".$i."' style='height: 50px; widht: 50px' src=".$images."/".$files[$i]."></img>";
+        }
+    }
+
+    public function addImage($file, $images) {
+        $target_file = $images . basename($file["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        // Check if image file is a actual image or fake image
+        $check = getimagesize($file["tmp_name"]);
+        if($check !== false) {
+            $uploadOk = 1;
+        } else {
+            $uploadOk = 0;
+        }
+        if ($uploadOk == 1) {
+            if (move_uploaded_file($file["tmp_name"], $target_file)) {
+                return $target_file;
+            } else {
+                return null;
+            }
+        }
     }
 }

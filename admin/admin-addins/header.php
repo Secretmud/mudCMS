@@ -10,6 +10,10 @@ if($_SESSION['rights'] == 'admin'){
             <a class="" href="adminPanel.php">Dashboard</a>
         </div>
         <div class="header-content">
+            <i class="fal fa-home"></i>
+            <a class="" href="adminAbout.php">About page</a>
+        </div>
+        <div class="header-content">
             <i class="fal fa-database"></i>
             <a class="list-parent" href="adminDatabase.php">Database:</a>
             <div class="">
