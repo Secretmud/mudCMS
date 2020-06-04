@@ -29,11 +29,13 @@ if($_SESSION['user'] == null){
                         </form>
                         <?php
                         require("../assets/connection.php");
+                        require("assets/contentHandler.php");
+                        $ch = new ContentHandler(dbConnection());
                         $username = $_POST["name"];
                         $about = $_POST["about"];
                         $images = "images/";
                         if(isset($_POST['submit'])) {
-                            $loc = addImage($_FILES["profilepic"], $images);
+                            $loc = $ch->addImage($_FILES["profilepic"], $images);
 
                         }
 

@@ -66,6 +66,7 @@ class ContentHandler {
     }
 
     public function addImage($file, $images) {
+        echo $file['tmp_name'];
         $target_file = $images . basename($file["name"]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
