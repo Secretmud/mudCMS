@@ -36,7 +36,6 @@ if($_SESSION['user'] == null){
                         $images = "images/";
                         if(isset($_POST['submit'])) {
                             $loc = $ch->addImage($_FILES["profilepic"], $images);
-
                         }
 
                         ?>

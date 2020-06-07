@@ -310,6 +310,18 @@ div.header:nth-child(3) {
     box-shadow: 1px 1px 1px black;
 }
 
+.list {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(10px, auto));
+	border: 1px solid black;
+}
+.list > div {
+	border-right: 1px solid black;
+}
+.list > div:last-child {
+	border-right: 0px;
+}
+
 @media (max-width: 750px) {
     .left-bar {
         position: relative;
