@@ -96,11 +96,7 @@ a:hover {
 */
 .main {
     display: grid;
-    grid-template-columns: 1fr 2fr 2fr;
-    margin: auto;
-    width: 70%;
-    padding-top: 1em;
-    grid-gap: 15px;
+    grid-template-columns: minmax(240px, 15%) 1fr;
 }
 .main > .center-top, .center-bottom {
     padding: 0.2em;
@@ -114,14 +110,6 @@ a:hover {
     grid-positioning, it's the easiest way of getting the layout you want
 */
 .left-bar {
-    box-shadow: 1px 1px 1px black;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    padding: 1em;
-    width: 20%;
-    height: 100%;
-    background: white;
 }
 .center-top {
     grid-column-start: 2;
@@ -261,19 +249,13 @@ div.header:nth-child(3) {
     top: 50%;
     left: 50%;
     background: lightgrey;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
-.modalHeader {
-    position: relative;
-    width: 100%;
-    height: 10%;
-    top: -4%;
-    background-color: darkgrey;
-}
-.modalMenu {
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-    transform: translateY(100%);
+
+.displayModal:nth-child(2) {
+    background: darkgrey;
+
 }
 .btnModal {
     position: fixed;
@@ -287,38 +269,45 @@ div.header:nth-child(3) {
     text-align: center;
 }
 .modalContent {
-    position: absolute;
-    display: grid;
-    grid-template-columns: repeat(6, auto);
     margin: 10px;
 }
 .modalContent > * {
-    /* widht: 50px; */
+    height: 50px;
     width: auto;
     margin: 10px;
 }
 .modalImgLoc {
-    position: absolute;
-    bottom: 5%;
-    left: 5%;
-}
-#imgLocation {
-    background: white;
-    padding: 5px;
-    border: 1px solid black;
-    border-radius: 3px;
-    box-shadow: 1px 1px 1px black;
+    margin: 10px;
 }
 
-.list {
+.modalBottom {
+    background: white;
+    border: 1px solid black;
+    border-radius: 3px;
+    margin: 5px;
+    grid-row-start: 2;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    height: 20px;
+    position: absolute;
+    bottom: 0px;
+    width: -moz-available;
+}
+
+.list-edit-parent {
+    height: 30vh;
+    overflow-y: scroll;
+}
+
+.list-edit {
 	display: grid;
-	grid-template-columns: repeat(4, minmax(10px, auto));
+	grid-template-columns: repeat(4, 1fr);
 	border: 1px solid black;
 }
-.list > div {
+.list-edit > div {
 	border-right: 1px solid black;
 }
-.list > div:last-child {
+.list-deit > div:last-child {
 	border-right: 0px;
 }
 
