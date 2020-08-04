@@ -56,14 +56,6 @@ $ch = new contentHandler(dbConnection());
             </div>
         </div>
         <div class="imgModal" id="imgModal">
-            <div class="modalHeader">
-                <ul class="modalMenu">
-                    <li class="modalItem">Insert</li>
-                    <li class="modalItem">Delete</li>
-                    <li class="modalItem">Copy</li>
-                    <li class="modalItem">Info</li>
-                </ul>
-            </div>
             <div class="modalContent">
                 <?php
                     $ch->displayImg();
@@ -72,6 +64,17 @@ $ch = new contentHandler(dbConnection());
             <div class="modalImgLoc">
                 <p>Image location:</p>
                 <p id="imgLocation"></p>
+                <p>Image name:</p>
+                <p id="imgName"></p>
+                <p>Image description:</p>
+                <p id="imgDesc"></p>
+                <p>Image size:</p>
+                <p id="imgSize"></p>
+                <p>Image extension:</p>
+                <p id="imgExtension"></p>
+            </div>
+            <div class="modalBottom" id="imgInc">
+                <p id="imgInc"></p>
             </div>
         </div>
 	</body>

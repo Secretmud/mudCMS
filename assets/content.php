@@ -13,18 +13,20 @@ function getPostsCat($conn, $cat) {
                   <div class='content-title'>
                   ".$row['title']."
                   </div>
-                  <img src=".$row['postimage']."></img>
+                  ".preg_replace("/!(.*):(.*)/", "<img class='image' src='$1' alt='$2'>", $row['postimage'])."
                   <div class='content-info'>
                       ".$row['poster']."<br>".$row['postdate']."
                   </div>
                   <div class='content'>
-                      ".$row['content']."
+                  ".$ch->ContentParser($row['content'])."
                   </div>
               </div>";
     }
 }
 
 function getPost($conn, $id) {
+    require("admin/assets/contentHandler.php");
+    $ch = new contentHandler($conn);
     $posts = $conn->prepare("SELECT * FROM content WHERE id=:id");
     try {
         $posts->bindParam(':id', $id);
@@ -39,12 +41,12 @@ function getPost($conn, $id) {
         <div class='content-title'>
         ".$row['title']."
         </div>
-        <img src=".$row['postimage']."></img>
+        ".preg_replace("/!(.*):(.*)/", "<img class='image' src='$1' alt='$2'>", $row['postimage'])."
         <div class='content-info'>
             ".$row['poster']."<br>".$row['postdate']."
         </div>
         <div class='content'>
-            ".$row['content']."
+        ".$ch->ContentParser($row['content'])."
         </div>
     </div>";
 }

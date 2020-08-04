@@ -21,6 +21,10 @@ if($_SESSION['user'] == null){
                 <div class="grid-content">
 					<div class="content">
                         <h3>Edit content:</h3>
+                        <form method="post">
+                            <input type="text" name="search">
+                            <input type="submit" value="submit">
+                        </form>
                         <?php
                         require("../assets/connection.php");
                         include("assets/data.php");
