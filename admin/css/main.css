@@ -310,7 +310,7 @@ div.header:nth-child(3) {
 .list-deit > div:last-child {
 	border-right: 0px;
 }
-
+/* 
 @media (max-width: 750px) {
     .left-bar {
         position: relative;
@@ -348,11 +348,9 @@ div.header:nth-child(3) {
         border-collapse: collapse;
         font-size: 12px;
     }
-    /*
     td {
         padding: 15px;
     }
-    */
     th {
         text-align: left;
     }
@@ -396,3 +394,4 @@ div.header:nth-child(3) {
         justify-content: space-around;
     }
 }
+ */

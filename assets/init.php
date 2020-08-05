@@ -59,9 +59,9 @@ class StartCheck {
     public function writeConfig() {
         echo "<form id='register-form' method='post'>
                 <h1 style='margin: atuo;'>Setup</h1>
-                <input class='register-form-input' name='username' placeholder='username' type='text'>
-                <input class='register-form-input' name='database' placeholder='database' type='text'>
-                <input class='register-form-input' name='dbpass' placeholder='pass' type='password'>
+                <input class='register-form-input' name='username' placeholder='dbusername' type='text'>
+                <input class='register-form-input' name='database' placeholder='database name' type='text'>
+                <input class='register-form-input' name='dbpass' placeholder='db pass' type='password'>
                 <input class='register-form-input' name='host' placeholder='127.0.0.1' type='text'>
                 <input class='register-form-input' name='cms-user' placeholder='username' type='text'>
                 <input class='register-form-input' name='cms-email' placeholder='email' type='text'>

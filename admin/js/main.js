@@ -61,10 +61,7 @@ contentBox.addEventListener("keydown", function() {
         event.preventDefault();
         contentBox.value = insertIntoTextArea(contentBox, "\t");
     }
-    if (event.key === "F4") {
-        event.preventDefault();
-        contentBox.value = insertIntoTextArea(contentBox, "\n~\n");
-    }
+
     if (event.key === "F1") {
         event.preventDefault();
         contentBox.value = insertIntoTextArea(contentBox, "# ");
@@ -77,9 +74,13 @@ contentBox.addEventListener("keydown", function() {
         event.preventDefault();
         contentBox.value = insertIntoTextArea(contentBox, "### ");
     }
-    if (event.key === "F3") {
+    if (event.key === "F4") {
         event.preventDefault();
-        contentBox.value = insertIntoTextArea(contentBox, "### ");
+        contentBox.value = insertIntoTextArea(contentBox, "\n~\n");
+    }
+    if (event.key === "F5") {
+        event.preventDefault();
+        contentBox.value = insertIntoTextArea(contentBox, "-- ");
     }
 });
 
