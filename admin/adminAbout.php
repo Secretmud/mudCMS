@@ -22,20 +22,21 @@ if($_SESSION['user'] == null){
 					<div class="content">
                         <h1>About you:</h1>
                         <form method="POST" enctype="multipart/form-data">
-                            <input type="text" name="name" placeholder="name" required>
+                            <input type="text" name="name" value="name" placeholder="name" required>
                             <input type="file" name="profilepic" placeholder="profileimg" >
-                            <textarea required placeholder="about" name="about" id="contentBox" style="height: 300px; width: 100%; resize: none;"></textarea>
+                            <textarea required placeholder="about" name="about" value="about" id="contentBox" style="height: 300px; width: 100%; resize: none;"></textarea>
                             <input type="submit" value="submit" name="submit">
                         </form>
                         <?php
                         require("../assets/connection.php");
                         require("assets/contentHandler.php");
                         $ch = new ContentHandler(dbConnection());
-                        $username = $_POST["name"];
-                        $about = $_POST["about"];
                         $images = "images/";
                         if(isset($_POST['submit'])) {
+                            $username = $_POST["name"];
+                            $about = $_POST["about"];   
                             $loc = $ch->addImage($_FILES["profilepic"], $images);
+                            echo $loc;
                         }
 
                         ?>

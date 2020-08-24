@@ -43,17 +43,16 @@ The end product will look like a simplified file manager, considering creating a
 Code tag  - ~ before and after block
 Link tag  - ! url - name
 Header(s) - # easy and clean
-Citation  - >
+Citation  - --
+Images    - ! url : name
 
 Code:
 ^~(\s\S.*)
 Link:
 ^!(.*?)-(.*)
-Header(s)
+Header(s):
 ^#{1,6}(.*)
-Citation
-^>(.*)
-
-```php
-test
-```
+Citation:
+^--(.*)
+Images:
+! url : name

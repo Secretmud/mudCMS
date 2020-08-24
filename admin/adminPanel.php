@@ -24,7 +24,11 @@ if($_SESSION['user'] == null){
                         <?php
                         require('../assets/connection.php');
                         include('assets/content-show.php');
-                        echo "Last post: ".last_post_title(dbConnection())['title']."<br>";
+                        try {
+                            echo "Last post: ".last_post_title(dbConnection())['title']."<br>";
+                        } catch (Exception $e) {
+                            echo "No posts yet... Do something about that! head over to add content!";
+                        }
                         echo "Totalt: ".total_posts(dbConnection())."<br>";
 
 

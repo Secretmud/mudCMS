@@ -30,7 +30,7 @@ function dbConnection() {
 ```
 This is the markdown used when posting
 
-```
+```Markdown
 # h1
 ## h2
 ### h3
