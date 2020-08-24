@@ -5,7 +5,7 @@ error_reporting(-1);
 require('assets/connection.php');
 include("assets/init.php");
 $start = new StartCheck();
-
+// testing this
 if ($start->dataBaseCheck()) {
     header("Location: page_view.php");
 } else {
