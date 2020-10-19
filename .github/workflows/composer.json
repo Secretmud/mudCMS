@@ -1,4 +1,8 @@
 {
-    "require": {
-    }
+    "name": "build/mud-crm",
+    "archive": {
+        "name": "mud-crm"
+    },
+    "description": "Simple, easy and open source CRM",
+    "license": "MIT"
 }
