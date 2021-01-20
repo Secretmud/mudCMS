@@ -34,7 +34,7 @@ class StartCheck {
             poster varchar(255),
             content text,
             postimage varchar(255),
-            category, varchar(255)');
+            category varchar(255))');
         $test->execute();
         usleep(500);
         $conn = null;
