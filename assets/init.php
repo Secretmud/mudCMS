@@ -12,7 +12,7 @@ class StartCheck {
         require_once "connection.php";
         $conn = dbConnection();
         $test = $conn->prepare('CREATE DATABASE IF NOT EXISTS :db');
-        $test->execute(":db" => $database );
+        $test->execute([":db" => $database]);
         usleep(500);
         $conn = null;
     }
