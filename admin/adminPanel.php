@@ -22,8 +22,8 @@ if($_SESSION['user'] == null){
 					<div class="content">
                         <h3>Post history:</h3>
                         <?php
-                        require('../assets/connection.php');
-                        include('assets/content-show.php');
+                        require_once '../assets/connection.php';
+                        include 'assets/content-show.php';
                         try {
                             echo "Last post: ".last_post_title(dbConnection())['title']."<br>";
                         } catch (Exception $e) {

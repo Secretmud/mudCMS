@@ -1,6 +1,6 @@
 <?php
 function getPostsCat($conn, $cat) {
-    $posts = $conn->prepare("SELECT * FROM content WHERE category=:category ORDER BY id DESC");
+    $posts = $conn->prepare("SELECT * FROM posts WHERE category=:category ORDER BY id DESC");
     try {
         $posts->bindParam(':category', $cat);
         $posts->execute();
@@ -27,7 +27,7 @@ function getPostsCat($conn, $cat) {
 function getPost($conn, $id) {
     require("admin/assets/contentHandler.php");
     $ch = new contentHandler($conn);
-    $posts = $conn->prepare("SELECT * FROM content WHERE id=:id");
+    $posts = $conn->prepare("SELECT * FROM posts WHERE id=:id");
     try {
         $posts->bindParam(':id', $id);
         $posts->execute();
@@ -53,7 +53,7 @@ function getPost($conn, $id) {
                         
 function getPostsLatest($conn, $amnt) {
     $posts = $conn->prepare('SELECT * 
-                             FROM content 
+                             FROM posts 
                              ORDER BY id 
                              DESC LIMIT :amnt');
     $posts->bindValue(':amnt', $amnt, PDO::PARAM_INT);

@@ -14,7 +14,7 @@ function createUser($conn, $email, $password, $rights) {
 class EditContent {
 
     public function getPost($conn, $id) {
-        $post = $conn->prepare('SELECT * FROM content WHERE id=:id');
+        $post = $conn->prepare('SELECT * FROM posts WHERE id=:id');
         echo "test";
         $post->execute([":id" => $id]);
         $postarr = $post->fetch(PDO::FETCH_ASSOC);
