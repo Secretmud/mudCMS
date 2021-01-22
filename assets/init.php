@@ -8,22 +8,24 @@ class StartCheck {
     }
 
     public function databaseCreate() {
-        require("assets/conf/config.php");
+        require_once "conf/config.php";
+        require_once "connection.php";
         $conn = dbConnection();
-        $test = $conn->prepare('CREATE DATABASE IF NOT EXISTS mudCMS');
-        $test->execute();
+        $test = $conn->prepare('CREATE DATABASE IF NOT EXISTS :db');
+        $test->execute(":db" => $database );
         usleep(500);
         $conn = null;
     }
 
     public function tableCreate() {
-        require("assets/conf/config.php");
+        require_once "connection.php";
         $conn = dbConnection();
         $test = $conn->prepare('CREATE TABLE IF NOT EXISTS users (
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             username VARCHAR(255) NOT NULL,
             pass VARCHAR(255) NOT NULL,
             email VARCHAR(255),
+            rights VARCHAR(255),
             reg_date TIMESTAMP)');
         $test->execute();
         usleep(500);
@@ -34,23 +36,22 @@ class StartCheck {
             poster varchar(255),
             content text,
             postimage varchar(255),
-            category, varchar(255)');
+            category varchar(255))');
         $test->execute();
         usleep(500);
         $conn = null;
     }
 
     private function register($uname, $pass, $email) {
-        require("assets/conf/config.php");
+        require_once "connection.php";
         $conn = dbConnection();
         try {
-            echo $uname ." ". $pass ." ". $email;
             $password = password_hash($pass, PASSWORD_DEFAULT);
             $creatUser = $conn->prepare("INSERT INTO users(username, pass, email, rights) VALUES (:username, :pass, :email, :rights)");
             $creatUser->execute([":username" => $uname, ":pass" => $password, ":email" => $email, ":rights" => "admin"]);
             echo "done";
         } catch (Exception $e) {
-            echo "Exception -> ".$e;
+            echo "Exception -> ".$e->getMessage();
         }
         $conn = null;
         header("Location: admin/login.php");
@@ -91,7 +92,9 @@ class StartCheck {
             }
             fclose($file);
             $this->databaseCreate();
+            echo "Database created";
             $this->tableCreate();
+            echo "Tables created";
             if ($_POST['pass1'] == $_POST['pass2']) {
                 $this->register($_POST["cms-user"],$_POST["pass1"],$_POST["cms-email"]);
             } else {
