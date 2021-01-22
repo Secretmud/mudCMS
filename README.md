@@ -36,7 +36,7 @@ This is the markdown used when posting
 
 -- citation
 
-! http://localhost/http/Blog/admin/images/gey_2.jpg : gey_2.jpg
+! http://localhost/http/Blog/admin/images/grey_2.jpg : grey_2.jpg
 
 ~
 $tmp = ($arr[$x] == "") ? "<div></div>" : preg_replace($find, $replace, $arr[$x]);
