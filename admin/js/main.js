@@ -61,7 +61,6 @@ contentBox.addEventListener("keydown", function() {
         event.preventDefault();
         contentBox.value = insertIntoTextArea(contentBox, "\t");
     }
-
     if (event.key === "F1") {
         event.preventDefault();
         contentBox.value = insertIntoTextArea(contentBox, "# ");

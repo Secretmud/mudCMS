@@ -77,6 +77,6 @@ $ch = new contentHandler(dbConnection());
                 <p id="imgInc"></p>
             </div>
         </div>
+        <script src="js/main.js"></script>
 	</body>
-    <script src="js/main.js"></script>
 </html>
