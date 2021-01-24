@@ -26,9 +26,9 @@ if($_SESSION['user'] == null){
                             <input type="submit" value="submit">
                         </form>
                         <?php
-                        require("../assets/connection.php");
-                        include("assets/data.php");
-                        require("assets/editing.php");
+                        require_once "../assets/connection.php";
+                        include "assets/data.php";
+                        require_once "assets/editing.php";
                         $ed = new EditContent();
                         $ed->listPosts(dbConnection());
                         if (isset($_POST['submit'])) {

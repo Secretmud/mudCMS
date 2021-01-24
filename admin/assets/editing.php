@@ -23,7 +23,7 @@ class EditContent {
     }
 
     public function listPosts($conn) {
-        $post = $conn->prepare("SELECT * FROM content");
+        $post = $conn->prepare("SELECT * FROM posts");
         $post->execute();
         $postarr = $post->fetchAll(PDO::FETCH_ASSOC);
         echo "<div class='list-edit-parent'>";
