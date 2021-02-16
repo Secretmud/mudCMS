@@ -1,6 +1,6 @@
 <div class="header header-space">
-Welcome: <?php echo $_SESSION['user'];?><br>
-Rights: <?php echo $_SESSION['rights'];?><br>
+<div>Welcome: <?php echo $_SESSION['user'];?></div>
+<div>Rights: <?php echo $_SESSION['rights'];?></div>
 </div>
 <?php
 if($_SESSION['rights'] == 'admin'){
