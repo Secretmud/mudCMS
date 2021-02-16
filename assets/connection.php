@@ -4,7 +4,7 @@
 function dbConnection() { 
     static $connection;
     if(!isset($connection)) {
-        include('conf/config.php');
+        require_once 'conf/config.php';
         try {
             $connection = new PDO("mysql:host=$host;dbname=$database", $username, $pass);
         } catch(PDOException $e) {
