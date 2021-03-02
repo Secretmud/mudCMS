@@ -1,9 +1,6 @@
 {
-    "name": "mud-cms",
+    "name": "mudcms",
     "type": "cms",
-    "archive": {
-        "name": "mud-cms"
-    },
     "description": "simple, easy and open source cms",
     "license": "mit"
 }
