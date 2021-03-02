@@ -1,8 +1,9 @@
 {
-    "name": "mud-crm",
+    "name": "mud-cms",
+    "type": "cms",
     "archive": {
-        "name": "mud-crm"
+        "name": "mud-cms"
     },
-    "description": "Simple, easy and open source CRM",
-    "license": "MIT"
+    "description": "simple, easy and open source cms",
+    "license": "mit"
 }
