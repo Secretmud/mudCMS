@@ -1,5 +1,5 @@
 {
-    "name": "mudcms",
+    "name": "build/mudcms",
     "type": "cms",
     "description": "simple, easy and open source cms",
     "license": "mit"
