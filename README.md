@@ -6,9 +6,10 @@ When you start up the website for the first time, it will prompt you to connect 
 
 The configuration file that is used to access the database is placed here:
 
-- assets
-    - conf
-        - config.php
+- api
+    - assets
+        - conf
+            - config.php
         
 If you end up creating something that needs database connection, use the following function:
 ```php
