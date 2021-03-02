@@ -1,0 +1,18 @@
+.code {
+    background: #e0f2f1;
+}
+.function {
+    color: #ffc11e;
+}
+.type {
+    color: #4a69ff;
+}
+.var {
+    color: #000000;
+}
+.msg {
+    color: #8eaf0c;
+}
+.numb {
+    color: #883088;
+}

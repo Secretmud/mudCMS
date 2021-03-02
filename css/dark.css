@@ -1,0 +1,39 @@
+body {
+    background: #141d26;
+    color: #b0bec5  
+}
+.header-content {
+    color: #b0bec5 
+}
+.content > h3, .content-title, .content-link {
+    color: #ff7043  
+}
+.main > .left-bar, .center-top, .center-bottom {
+}
+.left-bar, .center-top, .center-bottom {
+    background: #141d26;
+}
+.footer-text {
+   color: #deaf42
+}
+.menu_side {
+    background: #757575 ;
+    box-shadow: 5px 3px #424242 
+}
+.link {
+    color: #ff7043;
+
+}
+.bar1,
+.bar2,
+.bar3 {
+    background-color: #b0bec5
+}
+.menu {
+}
+
+@media screen and (max-width: 750px) {
+    .name-menu {
+        color: #deaf42
+    }
+}
