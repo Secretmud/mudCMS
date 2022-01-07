@@ -11,8 +11,7 @@ class StartCheck {
         require_once "conf/config.php";
         require_once "connection.php";
         $conn = dbConnection();
-        $test = $conn->prepare('CREATE DATABASE IF NOT EXISTS :db');
-        $test->execute([":db" => $database]);
+        $test = $conn->prepare("CREATE DATABASE IF NOT EXISTS $database");
         usleep(500);
         $conn = null;
     }
@@ -58,7 +57,8 @@ class StartCheck {
     }
 
     public function writeConfig() {
-        echo "<form id='register-form' method='post'>
+        echo "
+            <form id='register-form' method='post'>
                 <h1 style='margin: atuo;'>Setup</h1>
                 <input class='register-form-input' name='username' placeholder='dbusername' type='text'>
                 <input class='register-form-input' name='database' placeholder='database name' type='text'>
@@ -71,14 +71,6 @@ class StartCheck {
                 <input class='register-form-input' type='submit' placeholder='submit' name='submit' value='register'>
               </form>";
         if (isset($_POST['submit'])) {  
-            echo $_POST['username'];
-            echo $_POST['database'];
-            echo $_POST['dbpass'];
-            echo $_POST['host'];
-            echo $_POST['cms-user'];
-            echo $_POST['cms-email'];   
-            echo $_POST['pass1'];
-            echo $_POST['pass2'];
             $settings = [
                          "<?php",
                          "\$username = \"".$_POST['username']."\";",
@@ -86,15 +78,13 @@ class StartCheck {
                          "\$pass = \"".$_POST['dbpass']."\";",
                          "\$host = \"".$_POST['host']."\";"
                         ];  
-            $file = fopen("assets/conf/config.php", "w+");
+            $file = fopen("assets/conf/config.php", "w");
             foreach ($settings as $i) {
                 fwrite($file, $i."\n");
             }
             fclose($file);
             $this->databaseCreate();
-            echo "Database created";
             $this->tableCreate();
-            echo "Tables created";
             if ($_POST['pass1'] == $_POST['pass2']) {
                 $this->register($_POST["cms-user"],$_POST["pass1"],$_POST["cms-email"]);
             } else {
