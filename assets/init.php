@@ -4,7 +4,7 @@
 class StartCheck {
 
     public function dataBaseCheck() {
-        return (file_get_contents("assets/conf/config.php")) ? true : false;
+        return file_exists("assets/conf/config.php");
     }
 
     public function databaseCreate() {
