@@ -3,3 +3,5 @@ config.php
 api/assets/conf/config.php
 admin/images
 /vendor/
+
+.idea/
