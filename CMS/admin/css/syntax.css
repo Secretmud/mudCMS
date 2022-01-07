@@ -1,18 +1,18 @@
 .code {
-    background: #e0f2f1;
+    background: #000e0d;
 }
 .function {
-    color: #ffc11e;
+    color: #cf6363;
 }
 .type {
-    color: #4a69ff;
+    color: #41496d;
 }
 .var {
-    color: #000000;
+    color: #c49898;
 }
 .msg {
-    color: #8eaf0c;
+    color: #323a15;
 }
 .numb {
-    color: #883088;
+    color: #a587a5;
 }
