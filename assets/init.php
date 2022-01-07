@@ -4,7 +4,7 @@
 class StartCheck {
 
     public function dataBaseCheck() {
-        return (file_get_contents("conf/config.php")) ? true : false;
+        return (file_get_contents("assets/conf/config.php")) ? true : false;
     }
 
     public function databaseCreate() {
@@ -21,22 +21,22 @@ class StartCheck {
         require_once "connection.php";
         $conn = dbConnection();
         $test = $conn->prepare('CREATE TABLE IF NOT EXISTS users (
-                                id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                                username VARCHAR(255) NOT NULL,
-                                pass VARCHAR(255) NOT NULL,
-                                email VARCHAR(255),
-                                rights VARCHAR(255),
-                                reg_date TIMESTAMP)');
+            id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(255) NOT NULL,
+            pass VARCHAR(255) NOT NULL,
+            email VARCHAR(255),
+            rights VARCHAR(255),
+            reg_date TIMESTAMP)');
         $test->execute();
         usleep(500);
         $test = $conn->prepare('CREATE TABLE IF NOT EXISTS posts (
-                                id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                                postdate DATE,
-                                title varchar(255),
-                                poster varchar(255),
-                                content text,
-                                postimage varchar(255),
-                                category varchar(255))');
+            id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            postdate DATE,
+            title varchar(255),
+            poster varchar(255),
+            tcontent text,
+            postimage varchar(255),
+            category varchar(255))');
         $test->execute();
         usleep(500);
         $conn = null;
@@ -86,7 +86,7 @@ class StartCheck {
                          "\$pass = \"".$_POST['dbpass']."\";",
                          "\$host = \"".$_POST['host']."\";"
                         ];  
-            $file = fopen("conf/config.php", "w+");
+            $file = fopen("assets/conf/config.php", "w+");
             foreach ($settings as $i) {
                 fwrite($file, $i."\n");
             }

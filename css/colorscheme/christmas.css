@@ -1,0 +1,31 @@
+body {
+    background: green;
+    color: red;
+}
+.header-content {
+    color: red;
+}
+.main > .left-bar, .center-top, .center-bottom {
+    border-color: green
+}
+.left-bar, .center-top, .center-bottom {
+    background: green;
+}
+.code {
+    background: darkgrey;
+    color: white;
+}
+.footer-text {
+   color: red;
+}
+.menu_side {
+    background: greenyellow;
+    box-shadow: 5px 3px black
+}
+.bar1,
+.bar2,
+.bar3 {
+    background-color: #333;
+}
+.menu {
+}

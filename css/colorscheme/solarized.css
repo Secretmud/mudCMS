@@ -1,0 +1,34 @@
+body {
+    background: #eee8d5;
+    color: #396f9e
+}
+.header-content {
+    color: black;
+}
+.content > h3 {
+    color: #1fad2b  
+}
+.main > .left-bar, .center-top, .center-bottom {
+    border-color: black
+}
+.left-bar, .center-top, .center-bottom {
+    background: #eee8d5;
+}
+.code {
+    background: #fdf6e3;
+    color: #b58900;
+}
+.footer-text {
+   color: black;
+}
+.menu_side {
+    background: #aed581;
+    box-shadow: 5px 3px black
+}
+.bar1,
+.bar2,
+.bar3 {
+    background-color: #333;
+}
+.menu {
+}

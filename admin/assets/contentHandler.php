@@ -109,14 +109,12 @@ class ContentHandler {
      */
 
     public function addImage($file, $images) {
-        $images = "../images/";
+        echo $file['tmp_name'];
         $target_file = $images . basename($file["name"]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         // Check if image file is a actual image or fake image
         $check = getimagesize($file["tmp_name"]);
-        echo " " . $check . " " . $target_file . " " . $images;
-        var_dump($file);
         if($check !== false) {
             $uploadOk = 1;
         } else {
