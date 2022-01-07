@@ -33,7 +33,7 @@ class StartCheck {
             postdate DATE,
             title varchar(255),
             poster varchar(255),
-            tcontent text,
+            content text,
             postimage varchar(255),
             category varchar(255))');
         $test->execute();
