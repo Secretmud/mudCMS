@@ -22,6 +22,7 @@
                         break;
                     case "cat":
                         echo $a->show_cat($_GET['category']);
+                        break;
                     default:
                         echo $a->page_view();
                         break;

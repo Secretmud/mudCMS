@@ -58,18 +58,36 @@ class StartCheck {
 
     public function writeConfig() {
         echo "
-            <form id='register-form' method='post'>
-                <h1 style='margin: atuo;'>Setup</h1>
-                <input class='register-form-input' name='username' placeholder='dbusername' type='text'>
-                <input class='register-form-input' name='database' placeholder='database name' type='text'>
-                <input class='register-form-input' name='dbpass' placeholder='db pass' type='password'>
-                <input class='register-form-input' name='host' placeholder='127.0.0.1' type='text'>
-                <input class='register-form-input' name='cms-user' placeholder='username' type='text'>
-                <input class='register-form-input' name='cms-email' placeholder='email' type='text'>
-                <input class='register-form-input' name='pass1' placeholder='pass' type='password'>
-                <input class='register-form-input' name='pass2' placeholder='pass' type='password'>
-                <input class='register-form-input' type='submit' placeholder='submit' name='submit' value='register'>
-              </form>";
+            <!DOCTYPE html>
+            <html lang='en'>
+                <head>
+                    <meta charset='utf-8'>
+                    <title>Website Home</title>
+                    <meta name='viewport' content='width=device-width, initial-scale=1'>
+                    <meta name='theme-color' content='#317EFB'/>
+                    <link rel='stylesheet' href='css/main.css'>
+                    <link rel='stylesheet' href='admin/css/syntax.css'>
+                    <link rel='stylesheet' href='css/colorscheme/dark.css'>
+                </head>
+
+                <body>
+                    <div class='main'>
+                        <form id='register-form' method='post'>
+                            <div class='register-form-title'>mudCMS init v0.0.1</div>
+                            <input class='register-form-input' name='username' placeholder='dbusername' type='text'>
+                            <input class='register-form-input' name='database' placeholder='database name' type='text'>
+                            <input class='register-form-input' name='dbpass' placeholder='db pass' type='password'>
+                            <input class='register-form-input' name='host' placeholder='127.0.0.1' type='text'>
+                            <input class='register-form-input' name='cms-user' placeholder='username' type='text'>
+                            <input class='register-form-input' name='cms-email' placeholder='email' type='text'>
+                            <input class='register-form-input' name='pass1' placeholder='pass' type='password'>
+                            <input class='register-form-input' name='pass2' placeholder='pass' type='password'>
+                            <input class='register-form-button' type='submit' placeholder='submit' name='submit' value='Complete setup'>
+                        </form>
+                    </div>
+                </body>
+            </html>
+            ";
         if (isset($_POST['submit'])) {  
             $settings = [
                          "<?php",
@@ -78,6 +96,8 @@ class StartCheck {
                          "\$pass = \"".$_POST['dbpass']."\";",
                          "\$host = \"".$_POST['host']."\";"
                         ];  
+            touch("assets/conf/config.php");
+            chmod("assets/conf/config.php", 0755);
             $file = fopen("assets/conf/config.php", "w");
             foreach ($settings as $i) {
                 fwrite($file, $i."\n");

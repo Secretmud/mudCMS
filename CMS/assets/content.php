@@ -40,7 +40,7 @@ class PostServer {
                                        DESC LIMIT :amnt');
         $posts->bindValue(':amnt', $amnt, PDO::PARAM_INT);
         $posts->execute();
-        $str = "";
+        $str = "<a class='' href='page_view.php?type=all'>Home</a>";
         while($row = $posts->fetch()) {
             $str .= "<a class='' href='page_view.php?type=cat&category=".$row['category']."'>".$row['category']."</a>";
         }
@@ -59,11 +59,16 @@ class PostServer {
         }
         if ($posts->fetch()) {
             while($row = $posts->fetch()) {
-                $data.= "title".$row['title']."
-                    postimage".$row['postimage']."
-                    author".$row['poster']."
-                    postdate".$row['postdate']."
-                    content".$row['content']."";
+                $data.= "
+                <div class='content'>    
+                    <div class='content-title'>".$row['title']."</div>
+                    <img src='".$row['postimage']."'></img>
+                    <div class='content-info'>
+                        <div class='author'>".$row['poster']."</div>
+                        <div class='date'>".$row['postdate']."</div>
+                    </div>
+                    <div>".$row['content']."</div>
+                </div>";
             }
         } else {
             $data .= "Error: No such category";
