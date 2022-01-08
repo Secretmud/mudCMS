@@ -23,57 +23,42 @@ class PostServer {
     private function create_content($posts) {
         $str = "";
         foreach ($posts as $post) {
-            $str .= "
-            <div class='content'>
-                <div class='content-title'>
-                    ".$post['title']."
-                </div> ";
-
-                if ($post['postimage'] != null) {
-                    $str .= "<img class='image-post' src='".$post['postimage']."'></img>";
-                }
-                $str .="<div class='content-info'>
-                    ".$post['poster']."<br>".$post['postdate']."<br>".$post['category']."
-                     </div>".$this->get_content($post['content'])."
-                    <a class='content-link' href='page_view.php?contentId=".$post['id']."'>Read more...</a>
-            </div>
-            ";
+            $str .= "<div class='content'><div class='content-title'>".$post['title']."</div> ";
+            if ($post['postimage'] != null) {
+                $str .= "<img class='image-post' src='".$post['postimage']."'></img>";
+            }
+            $str .="<div class='content-info'>".$post['poster']."<br>".$post['postdate']."<br>".$post['category']."
+                </div>".$this->get_content($post['content'])."
+                <a class='content-link' href='page_view.php?contentId=".$post['id']."'>Read more...</a>
+                </div>";
         }
 
         return $str;
     }
 
     private function create_single_post_content($post) {
-        $str = "
-            <div class='content'>
-                <div class='content-title'>
-                    ".$post['title']."
-                </div>";
-                if ($post['postimage'] != null) {
-                    $str .= "<img class='image-post' src='".$post['postimage']."'></img>";
-                }
-                $str .= "<div class='content'>".$post['content']."</div>
- 
-           
-            ";
+        $str = "<div class='content'><div class='content-title'>".$post['title']."</div>";
+        if ($post['postimage'] != null) {
+            $str .= "<img class='image-post' src='".$post['postimage']."'></img>";
+        }
+        $str .= "<div class='content'>".$post['content']."</div> ";
 
         return $str;
     }
 
     private function get_content($content) {
-        $lines = explode("\r\n", $content);
+        $lines = explode("\n", $content);
         $new_content = "";
+        $len = 30;
+        $end = (strlen($content) > $strlen) ? $strlen : strlen($content);
         foreach ($lines as $line) {
-
             if (preg_match("/img/", $line) == 1) {
                 continue;
             }
 
-            for ($i = 0; $i < 100; $i++) {
+            for ($i = 0; $i < $end ; $i++) {
                 $new_content .= $line[$i];
             }
-//            $new_content .= $line;
-//            $num_lines = $num_lines + 1;
         }
         return $new_content;
 
