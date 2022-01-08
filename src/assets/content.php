@@ -40,7 +40,7 @@ class PostServer {
                                        DESC LIMIT :amnt');
         $posts->bindValue(':amnt', $amnt, PDO::PARAM_INT);
         $posts->execute();
-        $str = "<a class='' href='page_view.php?type=all'>Home</a>";
+        $str = "<a class='' href='page_view.php'>Home</a>";
         while($row = $posts->fetch()) {
             $str .= "<a class='' href='page_view.php?type=cat&category=".$row['category']."'>".$row['category']."</a>";
         }

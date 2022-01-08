@@ -1,0 +1,20 @@
+{
+    "name": "secret/mud-cms",
+    "description": "Fast, simple and lightweight CMS",
+    "type": "project",
+    "require": {
+        "phpunit/php-timer": "^5.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Secret\\MudCms\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "secretmud",
+            "email": "lamefeed@gmail.com"
+        }
+    ]
+}
