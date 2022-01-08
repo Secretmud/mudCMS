@@ -3,6 +3,9 @@
    License: none (public domain)
 */
 
+@import "arrows.css";
+
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -134,11 +137,14 @@ html {
     margin-left: 0.5em;
 }
 .content {
+}
+.post {
     margin-left: 0.5em;
     font-size: 1rem;
     font-family: monospace;
     word-wrap: break-word;
-    white-space: pre-line
+    white-space: pre-line;
+    padding-bottom: 5em;
 }
 .content-link {
     text-decoration: none;
