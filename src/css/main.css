@@ -92,55 +92,34 @@ html {
 */
 .main {
     display: grid;
-    /*grid-template-columns: 1fr 2fr 2fr;*/
-    margin: auto;
-    width: 70%;
-    padding-top: 1em;
-    grid-gap: 15px;
+    grid-template-columns: 15% auto;
 }
-.main > .left-bar, .center-top, .center-bottom {
-    padding: 0.2em;
-}
-.left-bar, .center-top, .center-bottom {
-    font-size: 1.5em;
+.center-top {
+    display: flex;
+    justify-content: center;
 }
 /*
     grid-positioning, it's the easiest way of getting the layout you want
 */
-
 .left-bar {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 5;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
 }
-.center-top {
-    grid-column-start: 2;
-    grid-column-end: 4;
-    grid-row-start: 1;
-    grid-row-end: 3;
+.menu {
+    width: 100%;
+    height: 100vh;
+}
+.menu > a {
+    padding: 5px;
+    margin: 2px;
 }
 .grid-content {
-    display: grid;
     width: 100%;
-    justify-content: center;
-}
-.grid-content-code {
-    display: grid;
-    grid-template-columns: 80%;
-    width: 100%;
-    justify-content: center;
-}
-.grid-content > div {
-    margin: 1em;
+    margin: 10px;
 }
 
-.center-bottom {
-    grid-column-start: 2;
-    grid-column-end: 4;
-    grid-row-start: 3;
-    grid-row-end: 5;
-}
 /*
     Formating content and such
 */
@@ -243,6 +222,7 @@ html {
     display: flex;
     margin: auto;
     border-radius: 5px;
+    justify-content: flex-start;
 }
 /*
     Mobile-friendly stuff

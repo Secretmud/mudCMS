@@ -49,7 +49,7 @@ class PostServer {
     private function get_content($content) {
         $lines = explode("\n", $content);
         $new_content = "";
-        $len = 30;
+        $strlen = 30;
         $end = (strlen($content) > $strlen) ? $strlen : strlen($content);
         foreach ($lines as $line) {
             if (preg_match("/img/", $line) == 1) {
