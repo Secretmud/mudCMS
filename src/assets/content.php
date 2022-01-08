@@ -2,12 +2,12 @@
 
 class PostServer {
     private $conn;
-    
+
     public function __construct() {
         include "connection.php";
         $this->conn = dbConnection();
     }
-    
+
     public function get_posts_latest($amnt) {
         $posts = $this->conn->prepare('SELECT * 
                                        FROM posts 
@@ -15,23 +15,70 @@ class PostServer {
                                        DESC LIMIT :amnt');
         $posts->bindValue(':amnt', $amnt, PDO::PARAM_INT);
         $posts->execute();
+        $str = $this->create_content($posts->fetchAll());
+
+        return $str;
+    }
+
+    private function create_content($posts) {
         $str = "";
-        while($row = $posts->fetch()) {
+        foreach ($posts as $post) {
             $str .= "
             <div class='content'>
                 <div class='content-title'>
-                    ".$row['title']."
-                </div>
-                <div class='content-info'>
-                    ".$row['poster']."<br>".$row['postdate']."<br>".$row['category']."
-                    </div>".$row['content']."
-                    <a class='content-link' href='page_view.php?cat=".$row['category']."&contentId=".$row['id']."'.>Read more...</a>
+                    ".$post['title']."
+                </div> ";
+
+                if ($post['postimage'] != null) {
+                    $str .= "<img class='image-post' src='".$post['postimage']."'></img>";
+                }
+                $str .="<div class='content-info'>
+                    ".$post['poster']."<br>".$post['postdate']."<br>".$post['category']."
+                     </div>".$this->get_content($post['content'])."
+                    <a class='content-link' href='page_view.php?contentId=".$post['id']."'>Read more...</a>
             </div>
             ";
         }
 
         return $str;
     }
+
+    private function create_single_post_content($post) {
+        $str = "
+            <div class='content'>
+                <div class='content-title'>
+                    ".$post['title']."
+                </div>";
+                if ($post['postimage'] != null) {
+                    $str .= "<img class='image-post' src='".$post['postimage']."'></img>";
+                }
+                $str .= "<div class='content'>".$post['content']."</div>
+ 
+           
+            ";
+
+        return $str;
+    }
+
+    private function get_content($content) {
+        $lines = explode("\r\n", $content);
+        $new_content = "";
+        foreach ($lines as $line) {
+
+            if (preg_match("/img/", $line) == 1) {
+                continue;
+            }
+
+            for ($i = 0; $i < 100; $i++) {
+                $new_content .= $line[$i];
+            }
+//            $new_content .= $line;
+//            $num_lines = $num_lines + 1;
+        }
+        return $new_content;
+
+    }
+
 
     public function get_menu($amnt) {
         $posts = $this->conn->prepare('SELECT category, count(*) as NUM 
@@ -48,31 +95,39 @@ class PostServer {
 
     }
 
-    public function get_posts_cat($cat) {
+    public function get_posts_cat($cat): string
+    {
         $posts = $this->conn->prepare('SELECT * FROM posts WHERE category=:category');
-        $data = ""; 
+        $data = "";
         try {
             $posts->bindParam(':category', $cat);
-            $posts->execute();         
+            $posts->execute();
         } catch (Exception $e) {
             $data .= "Error: ".$e;
         }
-        if ($posts->fetch()) {
-            while($row = $posts->fetch()) {
-                $data.= "
-                <div class='content'>    
-                    <div class='content-title'>".$row['title']."</div>
-                    <img src='".$row['postimage']."'></img>
-                    <div class='content-info'>
-                        <div class='author'>".$row['poster']."</div>
-                        <div class='date'>".$row['postdate']."</div>
-                    </div>
-                    <div>".$row['content']."</div>
-                </div>";
-            }
+        if ($this->count_posts_in_cat($cat) > 0) {
+            $data = $this->create_content($posts->fetchAll());
         } else {
             $data .= "Error: No such category";
         }
         return $data;
+    }
+
+    private function count_posts_in_cat($cat) {
+        $count = $this->conn->prepare('SELECT COUNT(*) FROM posts WHERE category=:category');
+        $count->bindParam(':category', $cat);
+        $count->execute();
+        return $count->fetch();
+
+    }
+
+
+    public function get_single_post($id) {
+        $posts = $this->conn->prepare('SELECT * 
+                                       FROM posts 
+                                       WHERE id = :id');
+        $posts->bindValue(':id', $id, PDO::PARAM_INT);
+        $posts->execute();
+        return $this->create_single_post_content($posts->fetch());
     }
 }

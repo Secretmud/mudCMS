@@ -60,6 +60,7 @@ class ContentHandler {
             } else if (preg_match("/-- (.*)/m", $a, $match)) {
                 $a = preg_replace("/-- (.*)/", "<p class='citation'>$1</p>", $a);
             } else if (preg_match("/!(.*):(.*)/m", $a, $match)) {
+                $a = str_replace(array("\r", "\n"), '', $a);
                 $a = preg_replace("/!(.*):(.*)/", "<img class='image' src='$1' alt='$2'>", $a);
             }
             $output_tmp[$x] = $a;
