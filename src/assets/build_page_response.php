@@ -13,6 +13,10 @@ class ResponseBuilder {
         return $this->site_layout($this->ps->get_posts_latest($this->amt));
     }
 
+    public function post_view($id) {
+        return $this->site_layout($this->ps->get_single_post($id));
+    }
+
     public function show_cat($cat) {
         return $this->site_layout($this->ps->get_posts_cat($cat));
     }

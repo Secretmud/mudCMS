@@ -13,24 +13,42 @@
                 error_reporting(E_ALL);
                 include "assets/build_page_response.php";
                 $a = new ResponseBuilder();
-                if (!empty($_GET)) {
-                    switch($_GET['type']) {
-                        case "all":
-                            echo $a->page_view();
-                            break;
-                        case "latest":
-                            echo $a->page_view();
-                            break;
-                        case "cat":
-                            echo $a->show_cat($_GET['category']);
-                            break;
-                        default:
-                            echo $a->page_view();
-                            break;
-                    } 
-                } else {
-                    echo $a->page_view();
+
+            if (empty($_GET)) {
+                echo $a->page_view();
+            }
+            foreach ($_GET as $k => $v) {
+                switch ($k) {
+                    case "type":
+                        switch ($v) {
+                            case "latest":
+                                echo $a->page_view();
+                                break;
+                            case "cat":
+                                if (!empty($_GET['category'])) {
+                                    echo $a->show_cat($_GET['category']);
+                                }
+                                break;
+                            default:
+                                echo $a->page_view();
+                                break;
+                        }
+
+                        break;
+
+                    case "contentId":
+                        echo $a->post_view($v);
+                        break;
+
+                    default:
+                        echo $a->page_view();
+                        break;
                 }
+                break;
+            }
+
+
+
             ?>
         </div>
     </body>

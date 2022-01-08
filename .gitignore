@@ -2,4 +2,9 @@ config.php
 *.txt
 api/assets/conf/config.php
 admin/images
+<<<<<<< HEAD
 /vendor/
+
+=======
+>>>>>>> master
+.idea/

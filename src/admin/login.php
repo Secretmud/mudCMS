@@ -31,8 +31,6 @@ ob_start();
                 if(password_verify($password, $results['pass']) && $_SESSION['hit'] < 6){
                     $_SESSION['user'] = $results['username'];
                     $_SESSION['rights'] = $results['rights'];
-                  $_SESSION['user'] = "Secret";
-                  $_SESSION['rights'] = "admin";
                   header('Location: adminPanel.php');
                 } else {
                     $_SESSION['hit'] += 1;
