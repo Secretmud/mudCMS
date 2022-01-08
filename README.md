@@ -1,4 +1,4 @@
-# mudCRM
+# mudCMS
 When you start up the website for the first time, it will prompt you to connect to the database and have you fill in the name and password of the user that will be accessing said database.
 
 
