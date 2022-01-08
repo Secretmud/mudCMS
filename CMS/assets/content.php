@@ -25,7 +25,7 @@ class PostServer {
                 <div class='content-info'>
                     ".$row['poster']."<br>".$row['postdate']."<br>".$row['category']."
                     </div>".$row['content']."
-                    <a class='content-link' href='content.php?category=".$row['category']."&contentId=".$row['id']."'.>Read more...</a>
+                    <a class='content-link' href='page_view.php?cat=".$row['category']."&contentId=".$row['id']."'.>Read more...</a>
             </div>
             ";
         }
