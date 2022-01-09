@@ -93,12 +93,17 @@ class PostServer {
 
     }
 
-    public function get_posts_cat($cat): string
+    public function get_posts_cat($cat, $amnt, $page=0): string
     {
-        $posts = $this->conn->prepare('SELECT * FROM posts WHERE category=:category');
+        $offset = $page * $amnt;
+        $posts = $this->conn->prepare('SELECT * FROM posts WHERE category=:category
+                                                order by id
+                                                DESC LIMIT :amnt OFFSET :offset ');
         $data = "";
         try {
             $posts->bindParam(':category', $cat);
+            $posts->bindValue(':amnt', $amnt, PDO::PARAM_INT);
+            $posts->bindValue(':offset', $offset, PDO::PARAM_INT);
             $posts->execute();
         } catch (Exception $e) {
             $data .= "Error: ".$e;
