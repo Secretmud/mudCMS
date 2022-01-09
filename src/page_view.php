@@ -19,7 +19,7 @@
             }
             $page = 0;
             if (!empty($_GET['page'])) {
-                $page = $_GET['page'];
+                $page = (is_int($_GET['page'])) ? $_GET['page'] : 0;
             }
             foreach ($_GET as $k => $v) {
                 switch ($k) {
