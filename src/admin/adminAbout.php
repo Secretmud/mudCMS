@@ -31,7 +31,7 @@ if($_SESSION['user'] == null){
                         require("../assets/connection.php");
                         require("assets/contentHandler.php");
                         $ch = new ContentHandler(dbConnection());
-                        $images = "images/";
+                        $images = "./images/";
                         if(isset($_POST['submit'])) {
                             $username = $_POST["name"];
                             $about = $_POST["about"];   

@@ -34,18 +34,13 @@ $ch = new contentHandler(dbConnection());
                             <input type="submit" value="submit" name="submit">
                         </form>
                         <?php
-			ini_set('display_errors', 1);
-			ini_set('display_startup_errors', 1);
-			error_reporting(E_ALL);
                         if(isset($_POST["submit"])) {
                             $content = $_POST["content"];
                             $content = htmlspecialchars($content);
                             $title = $_POST["title"];
                             $date = date("Ymd");
                             $image = $_POST["postimage"];
-                            //echo $image;
                             $category = $_POST["category"];
-                            $content = $ch->contentParser($content);
                             enter_content(dbConnection(), $date, $title, $image, $content, $category);
                         }
                         ?>
