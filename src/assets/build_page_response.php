@@ -23,11 +23,16 @@ class ResponseBuilder {
     }
 
     public function add_arrows($page) {
-
-       $arrows = "<div class='bottom-navi'> 
-                    <a class='' href='page_view.php?type=latest&page=".($page-1)."'><i class='arrow left'></i></a>";
-       // <a class='' href='page_view.php?type=cat&category=".$row['category']."'>".$row['category']."</a>
-       $arrows .= "<a class='' href='page_view.php?type=latest&page=".($page+1)."'><i class='arrow right''></i></a></div>";
+        if ($page < 0) $page = 0;
+        $arrows = "<div class='bottom-navi'> ";
+        if ($page > 0) {
+            $arrows .=  "<a class='' href='page_view.php?type=latest&page=".($page-1)."'><i class='arrow left'></i></a>";
+        } else {
+            $arrows .= "<div class=''><i class='arrow-inactive left'></i></div>";
+        }
+        $arrows .= $page;
+        // <a class='' href='page_view.php?type=cat&category=".$row['category']."'>".$row['category']."</a>
+        $arrows .= "<a class='' href='page_view.php?type=latest&page=".($page+1)."'><i class='arrow right''></i></a></div>";
 
         return $arrows;
     }

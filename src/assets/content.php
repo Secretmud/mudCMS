@@ -61,10 +61,7 @@ class PostServer {
             if (preg_match("/img/", $line) == 1) {
                 continue;
             }
-
-            for ($i = 0; $i < $end ; $i++) {
-                $new_content .= $line[$i];
-            }
+            $new_content .= $line;
         }
         return $new_content;
 
