@@ -8,12 +8,14 @@ class PostServer {
         $this->conn = dbConnection();
     }
 
-    public function get_posts_latest($amnt) {
+    public function get_posts_latest($amnt, $page = 0) {
+        $offset = $page * $amnt;
         $posts = $this->conn->prepare('SELECT * 
                                        FROM posts 
                                        ORDER BY id 
-                                       DESC LIMIT :amnt');
+                                       DESC LIMIT :amnt OFFSET :offset');
         $posts->bindValue(':amnt', $amnt, PDO::PARAM_INT);
+        $posts->bindValue(':offset', $offset, PDO::PARAM_INT);
         $posts->execute();
         $str = $this->create_content($posts->fetchAll());
 
@@ -23,12 +25,16 @@ class PostServer {
     private function create_content($posts) {
         $str = "";
         foreach ($posts as $post) {
-            $str .= "<div class='content'><div class='content-title'>".$post['title']."</div> ";
+            $str .= "
+            <div class='post'>
+                <div class='content-title'>".$post['title']."</div> ";
             if ($post['postimage'] != null) {
                 $str .= "<img class='image-post' src='".$post['postimage']."'></img>";
             }
             $str .="<div class='content-info'>".$post['poster']."<br>".$post['postdate']."<br>".$post['category']."
-                </div>".$this->get_content($post['content'])."
+                </div>
+                <div class='content'>".$this->get_content($post['content'])."</div>
+                
                 <a class='content-link' href='page_view.php?contentId=".$post['id']."'>Read more...</a>
                 </div>";
         }
@@ -37,7 +43,7 @@ class PostServer {
     }
 
     private function create_single_post_content($post) {
-        $str = "<div class='content'><div class='content-title'>".$post['title']."</div>";
+        $str = "<div class='post'><div class='content-title'>".$post['title']."</div>";
         if ($post['postimage'] != null) {
             $str .= "<img class='image-post' src='".$post['postimage']."'></img>";
         }

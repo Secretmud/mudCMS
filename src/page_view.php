@@ -17,12 +17,16 @@
             if (empty($_GET)) {
                 echo $a->page_view();
             }
+            $page = 0;
+            if (!empty($_GET['page'])) {
+                $page = $_GET['page'];
+            }
             foreach ($_GET as $k => $v) {
                 switch ($k) {
                     case "type":
                         switch ($v) {
                             case "latest":
-                                echo $a->page_view();
+                                echo $a->page_view($page);
                                 break;
                             case "cat":
                                 if (!empty($_GET['category'])) {
