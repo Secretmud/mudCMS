@@ -3,13 +3,17 @@
 class ResponseBuilder {
     private $ps;
     private $amt;
+    private $limit;
     public function __construct() {
         include "content.php";
         $this->ps = new PostServer();
         $this->amt = 5; 
+        $this->limit = floor($this->ps->get_total_posts()/$this->amt);
     }
 
     public function page_view($page = 0) {
+        if ($page < 0) $page = 0;
+        if ($page > $this->limit) $page = $this->limit;
         return $this->site_layout($this->ps->get_posts_latest($this->amt, $page), $page, 1);
 
     }
@@ -23,7 +27,6 @@ class ResponseBuilder {
     }
 
     public function add_arrows($page) {
-        if ($page < 0) $page = 0;
         $arrows = "<div class='bottom-navi'> ";
         if ($page > 0) {
             $arrows .=  "<a class='' href='page_view.php?type=latest&page=".($page-1)."'><i class='arrow left'></i></a>";
@@ -32,7 +35,11 @@ class ResponseBuilder {
         }
         $arrows .= $page;
         // <a class='' href='page_view.php?type=cat&category=".$row['category']."'>".$row['category']."</a>
-        $arrows .= "<a class='' href='page_view.php?type=latest&page=".($page+1)."'><i class='arrow right''></i></a></div>";
+        if ($page < $this->limit) {
+            $arrows .= "<a class='' href='page_view.php?type=latest&page=".($page+1)."'><i class='arrow right''></i></a></div>";
+        } else {
+            $arrows .= "<div class=''><i class='arrow-inactive right'></i></div>";
+        }
 
         return $arrows;
     }

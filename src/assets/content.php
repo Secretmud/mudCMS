@@ -22,6 +22,14 @@ class PostServer {
         return $str;
     }
 
+    public function get_total_posts() {
+        $total_posts = $this->conn->prepare('SELECT id
+                                             FROM posts');
+
+        $total_posts->execute();
+        return $total_posts->rowCount();
+    }
+
     private function create_content($posts) {
         $str = "";
         foreach ($posts as $post) {
