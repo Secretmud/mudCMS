@@ -19,7 +19,7 @@
             }
             $page = 0;
             if (!empty($_GET['page'])) {
-                $page = (is_int($_GET['page'])) ? $_GET['page'] : 0;
+                $page =  $_GET['page'];
             }
             foreach ($_GET as $k => $v) {
                 switch ($k) {
@@ -30,7 +30,7 @@
                                 break;
                             case "cat":
                                 if (!empty($_GET['category'])) {
-                                    echo $a->show_cat($_GET['category']);
+                                    echo $a->show_cat($_GET['category'], $page);
                                 }
                                 break;
                             default:

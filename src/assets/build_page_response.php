@@ -8,7 +8,7 @@ class ResponseBuilder {
         include "content.php";
         $this->ps = new PostServer();
         $this->amt = 5; 
-        $this->limit = floor($this->ps->get_total_posts()/$this->amt);
+        $this->limit = ($this->ps->get_total_posts()/$this->amt);
     }
 
     public function page_view($page = 0) {
@@ -22,21 +22,30 @@ class ResponseBuilder {
         return $this->site_layout($this->ps->get_single_post($id));
     }
 
-    public function show_cat($cat) {
-        return $this->site_layout($this->ps->get_posts_cat($cat));
+    public function show_cat($cat, $page=0) {
+        if ($page < 0) $page = 0;
+        if ($page > $this->limit) $page = $this->limit;
+        return $this->site_layout($this->ps->get_posts_cat($cat, $this->amt, $page), $page, 1);
     }
 
     public function add_arrows($page) {
+        $type = 'latest';
+        if (!empty($_GET['type'])) {
+            $type = $_GET['type'];
+        }
+
+        $cat = $type == 'cat' ? $_GET['category'] : '';
+        $cat_string = $cat != '' ? "&category=".$cat : '';
         $arrows = "<div class='bottom-navi'> ";
         if ($page > 0) {
-            $arrows .=  "<a class='' href='page_view.php?type=latest&page=".($page-1)."'><i class='arrow left'></i></a>";
+            $arrows .=  "<a class='' href='page_view.php?type=".$type.$cat_string."&page=".($page-1)."'><i class='arrow left'></i></a>";
         } else {
             $arrows .= "<div class=''><i class='arrow-inactive left'></i></div>";
         }
         $arrows .= $page;
         // <a class='' href='page_view.php?type=cat&category=".$row['category']."'>".$row['category']."</a>
         if ($page < $this->limit) {
-            $arrows .= "<a class='' href='page_view.php?type=latest&page=".($page+1)."'><i class='arrow right''></i></a></div>";
+            $arrows .= "<a class='' href='page_view.php?type=".$type.$cat_string."&page=".($page+1)."'><i class='arrow right''></i></a></div>";
         } else {
             $arrows .= "<div class=''><i class='arrow-inactive right'></i></div>";
         }
@@ -55,4 +64,5 @@ class ResponseBuilder {
         $response .= "</div></div>";
         return $response;
     }
+
 }
