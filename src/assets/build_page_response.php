@@ -8,7 +8,7 @@ class ResponseBuilder {
         include "content.php";
         $this->ps = new PostServer();
         $this->amt = 5; 
-        $this->limit = ($this->ps->get_total_posts()/$this->amt);
+        $this->limit = floor($this->ps->get_total_posts()/$this->amt);
     }
 
     public function page_view($page = 0) {
