@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+use Secret\MudCms\persistence\Connection;
+
 if(!isset($_SESSION)) {
     session_start();
     $_SESSION['hit'];
@@ -20,9 +23,8 @@ ob_start();
             <input class="input-login" type="password" name="password" placeholder="*********" required></input>
             <input class="input-login" type="submit" name="confirmed" value="Logg inn"></input>
         </form>
-        <?php 
-            require("../assets/connection.php");
-            $conn = dbConnection();
+        <?php
+        $conn = (new Connection)->getConnection();
             if(!empty($_POST['email']) && !empty($_POST['password'])){
                 $password = $_POST['password'];
                 $check = $conn->prepare('SELECT * FROM users WHERE email = :email');

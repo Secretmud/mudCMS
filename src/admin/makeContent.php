@@ -7,9 +7,9 @@ if($_SESSION['user'] == null){
     header("Location: login.php");
 }
 include("assets/contentHandler.php");
-require("../assets/connection.php");
 include("assets/data.php");
-$ch = new contentHandler(dbConnection());
+require_once("persistence/Connection.php");
+$ch = new contentHandler();
 ?>
 <!DOCTYPE html>
 <html lang="en">

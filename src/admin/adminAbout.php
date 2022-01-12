@@ -28,9 +28,8 @@ if($_SESSION['user'] == null){
                             <input type="submit" value="submit" name="submit">
                         </form>
                         <?php
-                        require("../assets/connection.php");
-                        require("assets/contentHandler.php");
-                        $ch = new ContentHandler(dbConnection());
+
+                        $ch = new ContentHandler();
                         $images = "./images/";
                         if(isset($_POST['submit'])) {
                             $username = $_POST["name"];

@@ -1,14 +1,22 @@
 <?php
+namespace Secret\MudCms\assets;
+
+
+use PostServer;
+use Secret\MudCms\persistence\PostRepo;
 
 class ResponseBuilder {
     private $ps;
     private $amt;
     private $limit;
+    private $posts_repo;
     public function __construct() {
-        include "content.php";
+        require_once ("content.php");
+        require_once("persistence/PostRepo.php");
+        $this->posts_repo = new PostRepo();
         $this->ps = new PostServer();
         $this->amt = 5; 
-        $this->limit = floor($this->ps->get_total_posts()/$this->amt);
+        $this->limit = floor($this->posts_repo->get_total_posts()/$this->amt);
     }
 
     public function page_view($page = 0) {

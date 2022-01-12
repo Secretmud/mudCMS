@@ -1,34 +1,23 @@
 <?php
 
+use Secret\MudCms\persistence\MenuRepo;
+use Secret\MudCms\persistence\PostRepo;
+
 class PostServer {
-    private $conn;
+    private $posts_repo;
+    private $menu_repo;
 
     public function __construct() {
-        include "connection.php";
-        $this->conn = dbConnection();
+        require_once("persistence/MenuRepo.php");
+        $this->posts_repo = new PostRepo();
+        $this->menu_repo = new MenuRepo();
     }
 
     public function get_posts_latest($amnt, $page = 0) {
         $offset = $page * $amnt;
-        $posts = $this->conn->prepare('SELECT * 
-                                       FROM posts 
-                                       ORDER BY id 
-                                       DESC LIMIT :amnt OFFSET :offset');
-        $posts->bindValue(':amnt', $amnt, PDO::PARAM_INT);
-        $posts->bindValue(':offset', $offset, PDO::PARAM_INT);
-        $posts->execute();
-        $str = $this->create_content($posts->fetchAll());
-
-        return $str;
+        return $this->create_content($this->posts_repo->get_posts_latest($amnt, $offset));
     }
 
-    public function get_total_posts() {
-        $total_posts = $this->conn->prepare('SELECT id
-                                             FROM posts');
-
-        $total_posts->execute();
-        return $total_posts->rowCount();
-    }
 
     private function create_content($posts) {
         $str = "";
@@ -79,59 +68,21 @@ class PostServer {
 
 
     public function get_menu($amnt) {
-        $posts = $this->conn->prepare('SELECT category, count(*) as NUM 
-                                       FROM posts 
-                                       GROUP BY category
-                                       DESC LIMIT :amnt');
-        $posts->bindValue(':amnt', $amnt, PDO::PARAM_INT);
-        $posts->execute();
-        $str = "<a class='' href='page_view.php'>Home</a>";
-        while($row = $posts->fetch()) {
-            $str .= "<a class='' href='page_view.php?type=cat&category=".$row['category']."'>".$row['category']."</a>";
-        }
-        return $str;
+        return $this->menu_repo->get_menu($amnt);
 
     }
 
     public function get_posts_cat($cat, $amnt, $page=0): string
     {
         $offset = $page * $amnt;
-        $posts = $this->conn->prepare('SELECT * FROM posts WHERE category=:category
-                                                order by id
-                                                DESC LIMIT :amnt OFFSET :offset ');
-        $data = "";
-        try {
-            $posts->bindParam(':category', $cat);
-            $posts->bindValue(':amnt', $amnt, PDO::PARAM_INT);
-            $posts->bindValue(':offset', $offset, PDO::PARAM_INT);
-            $posts->execute();
-        } catch (Exception $e) {
-            $data .= "Error: ".$e;
-        }
-        if ($this->count_posts_in_cat($cat) > 0) {
-            $data = $this->create_content($posts->fetchAll());
-        } else {
-            $data .= "Error: No such category";
-        }
-        return $data;
+        return $this->create_content($this->posts_repo->get_posts_cat($cat, $amnt, $offset));
     }
 
-    private function count_posts_in_cat($cat) {
-        $count = $this->conn->prepare('SELECT COUNT(*) FROM posts WHERE category=:category');
-        $count->bindParam(':category', $cat);
-        $count->execute();
-        return $count->fetch();
 
-    }
 
 
     public function get_single_post($id) {
-        $posts = $this->conn->prepare('SELECT * 
-                                       FROM posts 
-                                       WHERE id = :id');
-        $posts->bindValue(':id', $id, PDO::PARAM_INT);
-        $posts->execute();
-        return $this->create_single_post_content($posts->fetch());
+        return $this->create_single_post_content($this->posts_repo->get_single_post($id));
     }
 
     private function countChars($var) {
