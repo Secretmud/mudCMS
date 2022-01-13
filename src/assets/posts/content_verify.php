@@ -27,8 +27,8 @@ class ContentVerify {
 
     }
 
-    public function verify_citation() : bool {
-
+    public function verify_citation(String $image) : bool {
+        return preg_match("/!(.*):(.*)/", $image);
     }
 
 }
