@@ -1,25 +1,30 @@
 <?php
 
 
+use Secret\MudCms\persistence\Connection;
+
 class StartCheck {
 
+    private $conn;
+    public function __construct() {
+        require_once("persistence/Connection.php");
+        $this->conn = (new Connection)->getConnection();
+    }
+
     public function dataBaseCheck() {
-        return file_exists("assets/conf/config.php");
+        return file_exists("persistence/conf/config.php");
     }
 
     public function databaseCreate() {
-        require_once "conf/config.php";
-        require_once "connection.php";
-        $conn = dbConnection();
-        $test = $conn->prepare("CREATE DATABASE IF NOT EXISTS $database");
+        require_once "persistence/conf/config.php";
+
+        $this->conn->prepare("CREATE DATABASE IF NOT EXISTS $database");
         usleep(500);
         $conn = null;
     }
 
     public function tableCreate() {
-        require_once "connection.php";
-        $conn = dbConnection();
-        $test = $conn->prepare('CREATE TABLE IF NOT EXISTS users (
+        $test = $this->conn->prepare('CREATE TABLE IF NOT EXISTS users (
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             username VARCHAR(255) NOT NULL,
             pass VARCHAR(255) NOT NULL,
@@ -28,7 +33,7 @@ class StartCheck {
             reg_date TIMESTAMP)');
         $test->execute();
         usleep(500);
-        $test = $conn->prepare('CREATE TABLE IF NOT EXISTS posts (
+        $test = $this->conn->prepare('CREATE TABLE IF NOT EXISTS posts (
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             postdate DATE,
             title varchar(255),
@@ -42,11 +47,9 @@ class StartCheck {
     }
 
     private function register($uname, $pass, $email) {
-        require_once "connection.php";
-        $conn = dbConnection();
         try {
             $password = password_hash($pass, PASSWORD_DEFAULT);
-            $creatUser = $conn->prepare("INSERT INTO users(username, pass, email, rights) VALUES (:username, :pass, :email, :rights)");
+            $creatUser = $this->conn->prepare("INSERT INTO users(username, pass, email, rights) VALUES (:username, :pass, :email, :rights)");
             $creatUser->execute([":username" => $uname, ":pass" => $password, ":email" => $email, ":rights" => "admin"]);
             echo "done";
         } catch (Exception $e) {

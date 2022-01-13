@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+use Secret\MudCms\persistence\Connection;
+
 if(!isset($_SESSION)) {
     session_start();
 }
@@ -7,14 +10,18 @@ if($_SESSION['user'] == null){
     header("Location: login.php");
 }
 include("assets/contentHandler.php");
-require("../assets/connection.php");
 include("assets/data.php");
-$ch = new contentHandler(dbConnection());
+require_once("../persistence/Connection.php");
+$ch = new contentHandler();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <?php include('admin-addins/head.php');?>
+    <?php include('admin-addins/head.php');
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);?>
 	<body>
+
 		<div class="main">
             <div class="left-bar">
                 <div class="content">
@@ -41,7 +48,7 @@ $ch = new contentHandler(dbConnection());
                             $date = date("Ymd");
                             $image = $_POST["postimage"];
                             $category = $_POST["category"];
-                            enter_content(dbConnection(), $date, $title, $image, $content, $category);
+                            enter_content((new Connection)->getConnection(), $date, $title, $image, $content, $category);
                         }
                         ?>
 					</div>

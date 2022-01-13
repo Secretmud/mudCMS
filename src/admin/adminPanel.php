@@ -1,4 +1,8 @@
-<?php 
+<?php
+
+
+use Secret\MudCms\persistence\Connection;
+
 if(!isset($_SESSION)) {
     session_start();
 }
@@ -22,14 +26,15 @@ if($_SESSION['user'] == null){
 					<div class="content">
                         <h3>Post history:</h3>
                         <?php
-                        require_once '../assets/connection.php';
+                        require_once("../persistence/Connection.php");
+                        $conn = (new Connection)->getConnection();
                         include 'assets/content-show.php';
                         try {
-                            echo "Last post: ".last_post_title(dbConnection())['title']."<br>";
+                            echo "Last post: ".last_post_title($conn)['title']."<br>";
                         } catch (Exception $e) {
                             echo "No posts yet... Do something about that! head over to add content!";
                         }
-                        echo "Totalt: ".total_posts(dbConnection())."<br>";
+                        echo "Totalt: ".total_posts($conn)."<br>";
 
 
                         ?>

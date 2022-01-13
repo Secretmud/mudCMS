@@ -1,11 +1,14 @@
 <?php
 
+use Secret\MudCms\persistence\Connection;
+
 class ContentHandler {
 
     private $conn;
 
-    function __contructor(\PDO $conn) {
-        $this->conn = $conn;
+    function __contructor() {
+        require_once("../../persistence/Connection.php");
+        $this->conn = (new Connection)->getConnection();
     }
 
     private function countChars($var) {

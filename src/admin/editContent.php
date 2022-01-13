@@ -1,4 +1,8 @@
-<?php 
+<?php
+
+
+use Secret\MudCms\persistence\Connection;
+
 if(!isset($_SESSION)) {
     session_start();
 }
@@ -26,13 +30,14 @@ if($_SESSION['user'] == null){
                             <input type="submit" value="submit">
                         </form>
                         <?php
-                        require("../assets/connection.php");
+                        require_once("../persistence/Connection.php");
+                        $conn = (new Connection)->getConnection();
                         include("assets/data.php");
                         require("assets/editing.php");
                         $ed = new EditContent();
-                        $ed->listPosts(dbConnection());
+                        $ed->listPosts($conn);
                         if (isset($_POST['submit'])) {
-                            $contentarr = $ch->getPost(dbConnection(), $id);
+                            $contentarr = $ch->getPost($conn, $id);
                             echo "
                                 <form method='POST' enctype='multipart/form-data'>
                                     <input type='text' name='title' required>".$contentarr['title']."</input> <br>
@@ -43,7 +48,7 @@ if($_SESSION['user'] == null){
                                 </form>
                             ";
                             if (isset($_POST["submit_change"])) {
-                                enter_content(dbConnection(), $date, $title, $image, $content, $category);
+                                enter_content($conn, $date, $title, $image, $content, $category);
                             }
                         }
                         ?>

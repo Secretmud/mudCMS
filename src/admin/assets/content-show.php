@@ -9,9 +9,9 @@ function last_post_title($conn) {
 }
 
 function total_posts($conn) {
-    $total_posts = $conn->prepare('SELECT id, count(*) FROM posts');
+    $total_posts = $conn->prepare('SELECT count(*) FROM posts');
     $total_posts->execute();
-    $total = $total_posts->rowCount();
+    $total = $total_posts->fetch()[0];
     return $total;
 }
 
