@@ -1,13 +1,13 @@
 <?php
 
 use Secret\MudCms\persistence\Connection;
-require_once("persistence/Connection.php");
 
 class ContentHandler {
 
     private $conn;
 
     function __contructor() {
+        require_once("../../persistence/Connection.php");
         $this->conn = (new Connection)->getConnection();
     }
 

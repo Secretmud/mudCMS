@@ -2,23 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="652609b6-fca6-4023-ade0-6e6b0683f587" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/persistence/Connection.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/persistence/MenuRepo.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/persistence/PostRepo.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin/adminAbout.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/adminAbout.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/admin/adminDatabase.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/adminDatabase.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/admin/adminPanel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/adminPanel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/admin/assets/contentHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/assets/contentHandler.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/admin/editContent.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/editContent.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/admin/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/login.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/admin/makeContent.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/makeContent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/build_page_response.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/ResponseBuilder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/connection.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/content.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/content.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/assets/init.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/init.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/page_view.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

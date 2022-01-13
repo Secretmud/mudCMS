@@ -1,6 +1,5 @@
 <?php
 
-use Secret\MudCms\persistence\Connection;
 
 if(!isset($_SESSION)) {
     session_start();
@@ -29,6 +28,7 @@ if($_SESSION['user'] == null){
                             <input type="submit" value="submit">
                         </form>
                         <?php
+                        require_once("../persistence/Connection.php");
                         $conn = (new Connection)->getConnection();
                         include("assets/data.php");
                         require("assets/editing.php");

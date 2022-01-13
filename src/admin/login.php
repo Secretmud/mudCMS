@@ -1,6 +1,5 @@
 <?php
 
-use Secret\MudCms\persistence\Connection;
 
 if(!isset($_SESSION)) {
     session_start();
@@ -24,13 +23,18 @@ ob_start();
             <input class="input-login" type="submit" name="confirmed" value="Logg inn"></input>
         </form>
         <?php
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+
+        require_once("../persistence/Connection.php");
         $conn = (new Connection)->getConnection();
             if(!empty($_POST['email']) && !empty($_POST['password'])){
                 $password = $_POST['password'];
                 $check = $conn->prepare('SELECT * FROM users WHERE email = :email');
                 $check->execute([':email' => $_POST['email']]);
                 $results = $check->fetch(PDO::FETCH_ASSOC);
-                if(password_verify($password, $results['pass']) && $_SESSION['hit'] < 6){
+                if(password_verify($password, $results['pass']) && $_SESSION['hit'] < 600){
                     $_SESSION['user'] = $results['username'];
                     $_SESSION['rights'] = $results['rights'];
                   header('Location: adminPanel.php');

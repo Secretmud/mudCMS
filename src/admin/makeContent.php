@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 if(!isset($_SESSION)) {
     session_start();
 }
@@ -8,13 +9,17 @@ if($_SESSION['user'] == null){
 }
 include("assets/contentHandler.php");
 include("assets/data.php");
-require_once("persistence/Connection.php");
+require_once("../persistence/Connection.php");
 $ch = new contentHandler();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <?php include('admin-addins/head.php');?>
+    <?php include('admin-addins/head.php');
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);?>
 	<body>
+
 		<div class="main">
             <div class="left-bar">
                 <div class="content">
@@ -41,7 +46,7 @@ $ch = new contentHandler();
                             $date = date("Ymd");
                             $image = $_POST["postimage"];
                             $category = $_POST["category"];
-                            enter_content(dbConnection(), $date, $title, $image, $content, $category);
+                            enter_content((new Connection)->getConnection(), $date, $title, $image, $content, $category);
                         }
                         ?>
 					</div>

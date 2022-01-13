@@ -1,6 +1,5 @@
 <?php
 
-use Secret\MudCms\persistence\Connection;
 
 if(!isset($_SESSION)) {
     session_start();
@@ -25,6 +24,7 @@ if($_SESSION['user'] == null){
 					<div class="content">
                         <h3>Post history:</h3>
                         <?php
+                        require_once("../persistence/Connection.php");
                         $conn = (new Connection)->getConnection();
                         include 'assets/content-show.php';
                         try {

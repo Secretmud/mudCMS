@@ -1,21 +1,22 @@
 <?php
 
 
-use Secret\MudCms\persistence\Connection;
+
 
 class StartCheck {
 
     private $conn;
     public function __construct() {
+        require_once("persistence/Connection.php");
         $this->conn = (new Connection)->getConnection();
     }
 
     public function dataBaseCheck() {
-        return file_exists("assets/conf/config.php");
+        return file_exists("persistence/conf/config.php");
     }
 
     public function databaseCreate() {
-        require_once "conf/config.php";
+        require_once "persistence/conf/config.php";
 
         $this->conn->prepare("CREATE DATABASE IF NOT EXISTS $database");
         usleep(500);
