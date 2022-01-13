@@ -11,6 +11,8 @@ class PostServer {
         require_once("persistence/MenuRepo.php");
         $this->posts_repo = new PostRepo();
         $this->menu_repo = new MenuRepo();
+        include "posts/content_parser.php";
+        $this->cp = new ContentParser();
     }
 
     public function get_posts_latest($amnt, $page = 0) {
@@ -30,7 +32,7 @@ class PostServer {
             }
             $str .="<div class='content-info'>".$post['poster']."<br>".$post['postdate']."<br>".$post['category']."
                 </div>
-                <div class='content'>".$this->content_parser($this->get_content($post['content']))."</div>
+                <div class='content'>".$this->cp->content_parser($this->get_content($post['content']))."</div>
                 
                 <a class='content-link' href='page_view.php?contentId=".$post['id']."'>Read more...</a>
                 </div>";
@@ -44,7 +46,7 @@ class PostServer {
         if ($post['postimage'] != null) {
             $str .= "<img class='image-post' src='".$post['postimage']."'></img>";
         }
-        $str .= "<div class='content'>".$this->content_parser($post['content'])."</div> ";
+        $str .= "<div class='content'>".$this->cp->content_parser($post['content'])."</div> ";
 
         return $str;
     }
@@ -80,88 +82,7 @@ class PostServer {
 
 
 
-
     public function get_single_post($id) {
         return $this->create_single_post_content($this->posts_repo->get_single_post($id));
-    }
-
-    private function countChars($var) {
-        $amt = 0;
-        foreach (str_split($var) as $x) {
-            if ($x === "#")
-                $amt++;
-            else 
-                break;
-        }
-        return $amt;
-    }
-
-    private function content_parser($content) {
-        $arr = explode("\n", $content);
-        $str = "";
-        $first = true;
-        $code = array();
-        $ln = 0;
-        foreach ($arr as $a) {
-            if (preg_match("/^~/m", $a)) {
-                array_push($code, $ln);
-            }
-            $ln++;
-        }
-
-        for ($i = 0; $i < sizeof($code); $i+=2) {
-            $arr[$code[$i]] = preg_replace("/^~(.*)/", "<div class='code'>$1", $arr[$code[$i]]);
-            $arr[$code[$i+1]] = preg_replace("/^~/", "</div>", $arr[$code[$i+1]]);
-            $start = $code[$i];
-            while ($start != $code[$i+1]) {
-                $find = ["/([a-zA-Z0-9_-]*)\((.*)\)/",
-                        "/(\bint|\bstr|\bchar|\blong|\bString|\bbyte)/",
-                        "/(\".*\")/",
-                        "/([0-9])/",
-                        "/\[link\](.*)\:(.*)\[\/link\]/",
-                        ];
-                $replace = ["<span class='function'>$1(<span class='var'>$2</span>)</span>",
-                            "<span class='type'>$1</span>",
-                            "<span class='msg'>$1</span>",
-                            "<span class='numb'>$1</span>",
-                            "<a class='link' href='$1' target='_blank'>$2</a>"];
-                //$tmp = ($arr[$x] == "") ? "<div></div>" : preg_replace($find, $replace, $arr[$x]);
-                $arr[$start] = preg_replace($find, $replace, $arr[$start]);
-                $start++;
-            }
-        }
-        $x = 0;
-        for ($i = 0; $i < sizeof($arr); $i++) {
-            if (in_array($i, $code)) {
-                $i = $code[$x+1];
-                $x+=2;
-            }
-            if (preg_match("/^#/m", $arr[$i])) {
-                $replace = "";
-                $count = $this->countChars($arr[$i]); 
-                switch($count) {
-                    case 1:
-                        $replace = "<h1>$1</h1>";
-                        break;
-                    case 2:
-                        $replace = "<h2>$1</h2>";
-                        break;
-                    case 3:
-                        $replace = "<h3>$1</h3>";
-                        break;
-                    default:
-                        $replace = "<h1>$1</h1>";
-                        break;
-                }
-                $arr[$i] = preg_replace("/#{".$count."}(.*)/", $replace, $arr[$i]);
-            } else if (preg_match("/-- (.*)/m", $arr[$i])) {
-                $arr[$i] = preg_replace("/-- (.*)/", "<p class='citation'>$1</p>", $arr[$i]);
-            } else if (preg_match("/!(.*):(.*)/m", $arr[$i])) {
-                $arr[$i] = str_replace(array("\r", "\n"), '', $arr[$i]);
-                $arr[$i] = preg_replace("/!(.*):(.*)/", "<img class='image' src='$1' alt='$2'>", $arr[$i]);
-            }
-        }
-        foreach ($arr as $ot) $str .= $ot;
-        return $str;
     }
 }
