@@ -1,6 +1,6 @@
 <?php
 namespace Secret\MudCms\persistence;
-use Connection;
+use Secret\MudCms\persistence\Connection;
 use PDO;
 
 class MenuRepo {

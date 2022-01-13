@@ -3,7 +3,7 @@
 namespace Secret\MudCms\persistence;
 
 
-use Connection;
+use Secret\MudCms\persistence\Connection;
 use Exception;
 use PDO;
 

@@ -5,11 +5,12 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/admin/adminDatabase.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/adminDatabase.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/admin/adminPanel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/adminPanel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/admin/assets/contentHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/assets/contentHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/admin/assets/content-show.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/assets/content-show.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/admin/editContent.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/editContent.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/admin/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/login.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/admin/makeContent.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/admin/makeContent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/init.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/init.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/persistence/MenuRepo.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/persistence/MenuRepo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/persistence/PostRepo.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/persistence/PostRepo.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

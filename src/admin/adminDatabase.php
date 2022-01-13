@@ -1,5 +1,7 @@
 <?php
 
+use Secret\MudCms\persistence\Connection;
+
 require_once("../persistence/Connection.php");
 if(!isset($_SESSION)) {
     session_start();

@@ -1,6 +1,8 @@
 <?php
 
 
+use Secret\MudCms\persistence\Connection;
+
 if(!isset($_SESSION)) {
     session_start();
 }

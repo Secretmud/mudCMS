@@ -1,7 +1,7 @@
 <?php
 
 
-
+use Secret\MudCms\persistence\Connection;
 
 class StartCheck {
 
