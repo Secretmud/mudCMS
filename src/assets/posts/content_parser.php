@@ -26,7 +26,7 @@ class ContentParser {
         $code = array();
         $ln = 0;
         foreach ($arr as $a) {
-            if (preg_match("/^~/m", $a)) {
+            if (preg_match("/^~/", $a)) {
                 array_push($code, $ln);
             }
             $ln++;
@@ -34,25 +34,20 @@ class ContentParser {
         for ($i = 0; $i < sizeof($code); $i+=2) {
             $arr[$code[$i]] = preg_replace("/^~(.*)/", "<div class='code'>$1", $arr[$code[$i]]);
             $arr[$code[$i+1]] = preg_replace("/^~/", "</div>", $arr[$code[$i+1]]);
-            $start = $code[$i];
-            while ($start != $code[$i+1]) {
+            for ($x = $code[$i]; $x < $code[$i+1]; $x++) {
                 $find = ["/([a-zA-Z0-9_-]*)\((.*)\)/",
                         "/(\bint|\bstr|\bchar|\blong|\bString|\bbyte)/",
                         "/(\".*\")/",
                         "/([0-9])/",
-                        "/\[link\](.*)\:(.*)\[\/link\]/",
                         ];
                 $replace = ["<span class='function'>$1(<span class='var'>$2</span>)</span>",
                             "<span class='type'>$1</span>",
                             "<span class='msg'>$1</span>",
-                            "<span class='numb'>$1</span>",
-                            "<a class='link' href='$1' target='_blank'>$2</a>"];
+                            "<span class='numb'>$1</span>"];
                 //$tmp = ($arr[$x] == "") ? "<div></div>" : preg_replace($find, $replace, $arr[$x]);
-                $arr[$start] = preg_replace($find, $replace, $arr[$start]);
-                $start++;
+                $arr[$x] = preg_replace($find, $replace, $arr[$x]);
             }
         }
-        /*
         $x = 0;
         for ($i = 0; $i < sizeof($arr); $i++) {
             if (in_array($i, $code)) {
@@ -84,7 +79,6 @@ class ContentParser {
                 $arr[$i] = preg_replace("/!(.*):(.*)/", "<img class='image' src='$1' alt='$2'>", $arr[$i]);
             }
         }
-        */
         foreach ($arr as $ot) $str .= $ot;
         return $str;
     }
