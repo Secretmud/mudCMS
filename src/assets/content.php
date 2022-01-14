@@ -80,8 +80,6 @@ class PostServer {
         return $this->create_content($this->posts_repo->get_posts_cat($cat, $amnt, $offset));
     }
 
-
-
     public function get_single_post($id) {
         return $this->create_single_post_content($this->posts_repo->get_single_post($id));
     }
