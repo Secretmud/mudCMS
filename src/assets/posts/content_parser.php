@@ -31,7 +31,6 @@ class ContentParser {
             }
             $ln++;
         }
-
         for ($i = 0; $i < sizeof($code); $i+=2) {
             $arr[$code[$i]] = preg_replace("/^~(.*)/", "<div class='code'>$1", $arr[$code[$i]]);
             $arr[$code[$i+1]] = preg_replace("/^~/", "</div>", $arr[$code[$i+1]]);
@@ -53,6 +52,7 @@ class ContentParser {
                 $start++;
             }
         }
+        /*
         $x = 0;
         for ($i = 0; $i < sizeof($arr); $i++) {
             if (in_array($i, $code)) {
@@ -84,6 +84,7 @@ class ContentParser {
                 $arr[$i] = preg_replace("/!(.*):(.*)/", "<img class='image' src='$1' alt='$2'>", $arr[$i]);
             }
         }
+        */
         foreach ($arr as $ot) $str .= $ot;
         return $str;
     }

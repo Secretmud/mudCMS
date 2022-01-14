@@ -5,10 +5,8 @@ body {
 .header-content {
     color: #b0bec5 
 }
-.content > h3, .content-title, .content-link {
+.content > h1, h2, h3, .content-title, .content-link {
     color: #ff7043  
-}
-.main > .left-bar, .center-top, .center-bottom {
 }
 .left-bar, .center-top, .center-bottom {
     background: #141d26;
