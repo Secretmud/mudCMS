@@ -4,3 +4,4 @@ api/assets/conf/config.php
 admin/images
 /vendor/
 .idea/
+.composer.lock
