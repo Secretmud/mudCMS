@@ -56,11 +56,21 @@ class PostServer {
         $new_content = "";
         $size = 3;
         $end = 0;
-        foreach ($lines as $line) {
-            if (preg_match("/!(.*):(.*)/", $line) == 1) {
+        for ($i = 0; $i < sizeof($lines); $i++) {
+            if (preg_match("/!(.*):(.*)/", $lines[$i]) == 1) {
                 continue;
             }
-            $new_content .= $line."\n";
+            if (preg_match("/^~/", $lines[$i])) {
+                $i++;
+                while ($i < sizeof($lines)) {
+                    if (preg_match("/^~/", $lines[$i])) {
+                        $i++;
+                        if ($i >= sizeof($lines)) return $new_content;
+                    }
+                    $i++;
+                }
+            }
+            $new_content .= $lines[$i]."\n";
             if ($end == $size) break;
             $end ++;
         }
