@@ -1,11 +1,11 @@
 <?php
 
 
-use Secret\MudCms\persistence\Connection;
+use Secret\MudCms\services\UserService;
 
 if(!isset($_SESSION)) {
     session_start();
-    $_SESSION['hit'];
+//    $_SESSION['hit'];
 }
 ob_start();
 ?>
@@ -20,32 +20,21 @@ ob_start();
 <body>
     <div class="form-parent">
         <form class="form-login" method="POST">
-            <input class="input-login" type="text" name="email" placeholder="E-post" required></input>
-            <input class="input-login" type="password" name="password" placeholder="*********" required></input>
-            <input class="input-login" type="submit" name="confirmed" value="Logg inn"></input>
+            <input class="input-login" type="text" name="email" placeholder="E-post" required/>
+            <input class="input-login" type="password" name="password" placeholder="*********" required/>
+            <input class="input-login" type="submit" name="confirmed" value="Logg inn"/>
         </form>
         <?php
-        ini_set('display_errors', 1);
-        ini_set('display_startup_errors', 1);
-        error_reporting(E_ALL);
 
-        require_once("../persistence/Connection.php");
-        $conn = (new Connection)->getConnection();
+        require_once("../services/UserService.php");
             if(!empty($_POST['email']) && !empty($_POST['password'])){
                 $password = $_POST['password'];
-                $check = $conn->prepare('SELECT * FROM users WHERE email = :email');
-                $check->execute([':email' => $_POST['email']]);
-                $results = $check->fetch(PDO::FETCH_ASSOC);
-                if(password_verify($password, $results['pass']) && $_SESSION['hit'] < 600){
-                    $_SESSION['user'] = $results['username'];
-                    $_SESSION['rights'] = $results['rights'];
-                  header('Location: adminPanel.php');
-                } else {
-                    $_SESSION['hit'] += 1;
-                    echo "Wrong password and/or username";
-                    insertError($_SESSION['hit'], $_SESSION['REMOTE_ADDR']);
-                    echo "<br>Failed attempts ".$_SESSION['hit']."<br>";
-                }
+                $email = $_POST['email'];
+
+                // todo - her skal vi bruke den nye busniesslaget
+
+                $user_service = new UserService();
+                $user_service->verify_log_in($email, $password);
             }
         ?>
     </div>

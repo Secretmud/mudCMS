@@ -5,6 +5,7 @@ class ContentParser {
 
     private function code_block_builder(array $list) : String {
 
+        $code_block = "";
         return $code_block;
     }
 

@@ -30,9 +30,8 @@ if($_SESSION['user'] == null){
                             <input type="submit" value="submit">
                         </form>
                         <?php
-                        require_once("../persistence/Connection.php");
-                        $conn = (new Connection)->getConnection();
-                        include("assets/data.php");
+                        require_once("../persistence/PostRepo.php");
+                        $conn = (new \Secret\MudCms\persistence\PostRepo())->getConnection();
                         require("assets/editing.php");
                         $ed = new EditContent();
                         $ed->listPosts($conn);
@@ -48,7 +47,7 @@ if($_SESSION['user'] == null){
                                 </form>
                             ";
                             if (isset($_POST["submit_change"])) {
-                                enter_content($conn, $date, $title, $image, $content, $category);
+                                //enter_content($conn, $date, $title, $image, $content, $category);
                             }
                         }
                         ?>
