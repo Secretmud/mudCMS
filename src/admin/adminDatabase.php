@@ -2,7 +2,7 @@
 
 use Secret\MudCms\persistence\PostRepo;
 
-require_once("../persistence/Connection.php");
+require_once("../persistence/PostRepo.php");
 if(!isset($_SESSION)) {
     session_start();
 }

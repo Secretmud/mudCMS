@@ -102,7 +102,7 @@ class PostRepo
                                   ORDER BY id 
                                   DESC LIMIT 1');
         $post_title->execute();
-        return $post_title->fetch(PDO::FETCH_ASSOC);
+        return $post_title->fetch(PDO::FETCH_ASSOC)['title'];
     }
 
     public function get_most_popular_cat() {
@@ -110,7 +110,7 @@ class PostRepo
                                    GROUP BY category
                                    ORDER BY count(*) DESC LIMIT 1');
         $highest_cat->execute();
-        return $highest_cat->fetch(PDO::FETCH_ASSOC);
+        return $highest_cat->fetch(PDO::FETCH_ASSOC)['category'];
     }
 
 
