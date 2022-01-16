@@ -1,7 +1,7 @@
 <?php
 
 
-use Secret\MudCms\persistence\Connection;
+use Secret\MudCms\persistence\PostRepo;
 
 if(!isset($_SESSION)) {
     session_start();
@@ -26,15 +26,15 @@ if($_SESSION['user'] == null){
 					<div class="content">
                         <h3>Post history:</h3>
                         <?php
-                        require_once("../persistence/Connection.php");
-                        $conn = (new Connection)->getConnection();
-                        include 'assets/content-show.php';
+                        require_once("../persistence/PostRepo.php");
+                        $post_repo = new PostRepo();
+
                         try {
-                            echo "Last post: ".last_post_title($conn)['title']."<br>";
+                            echo "Last post: ".$post_repo->get_last_post_title()."<br>";
                         } catch (Exception $e) {
                             echo "No posts yet... Do something about that! head over to add content!";
                         }
-                        echo "Totalt: ".total_posts($conn)."<br>";
+                        echo "Totalt: ".$post_repo->get_total_posts()."<br>";
 
 
                         ?>

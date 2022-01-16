@@ -1,6 +1,6 @@
 <?php
 
-use Secret\MudCms\persistence\Connection;
+use Secret\MudCms\persistence\PostRepo;
 
 require_once("../persistence/Connection.php");
 if(!isset($_SESSION)) {
@@ -26,14 +26,13 @@ if($_SESSION['user'] == null){
 					<div class="content">
                         <h3>Posts:</h3>
                         <?php
-                        $conn = (new Connection)->getConnection();
-                        include('assets/content-show.php');
+                        $post_repo = new PostRepo();
                         echo "Last post title: ";
-                        echo ucfirst(last_post_title($conn)['title']);
+                        echo ucfirst($post_repo->get_last_post_title());
                         echo "<br>Total posts: ";
-                        echo total_posts($conn);
+                        echo $post_repo->get_total_posts();
                         echo "<br>Most popular category: ";
-                        echo ucfirst(cat_pop($conn)['category']);
+                        echo ucfirst($post_repo->get_most_popular_cat());
                         ?>
 					</div>
 				</div>

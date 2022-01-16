@@ -16,5 +16,8 @@
             "name": "secretmud",
             "email": "lamefeed@gmail.com"
         }
-    ]
+    ],
+  "require": {
+    "ext-pdo": "*"
+  }
 }

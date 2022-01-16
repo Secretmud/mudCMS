@@ -29,11 +29,9 @@ class PostRepo
 
     public function get_total_posts(): int
     {
-        $total_posts = $this->conn->prepare('SELECT id
-                                             FROM posts');
-
+        $total_posts = $this->conn->prepare('SELECT count(*) FROM posts');
         $total_posts->execute();
-        return $total_posts->rowCount();
+        return $total_posts->fetch()[0];
     }
 
     public function get_posts_cat($cat, $amnt, $offset = 0) {
@@ -73,5 +71,49 @@ class PostRepo
         $posts->execute();
         return $posts->fetch();
     }
+
+    public function add_post( $date, $title, $postimage, $content, $category){
+
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        ob_start();
+        if ($_SESSION['user'] == null) {
+            header("Location: login.php");
+        }
+
+
+        $save_data = $this->conn->prepare("INSERT INTO posts(postdate, title, poster, content, postimage, category) 
+								 VALUES (:postdate, :title, :poster, :content, :postimage, :category)");
+        $save_data->execute([':postdate' => $date, ':title' => $title, ':poster' => $_SESSION['user'], ':content' => $content, ':postimage' => $postimage, ':category' => $category]);
+
+    }
+
+    public function edit_post() {
+
+    }
+
+    public function delete_post() {
+
+    }
+
+    public function get_last_post_title() {
+        $post_title = $this->conn->prepare('SELECT title FROM posts 
+                                  ORDER BY id 
+                                  DESC LIMIT 1');
+        $post_title->execute();
+        return $post_title->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function get_most_popular_cat() {
+        $highest_cat = $this->conn->prepare('SELECT category FROM posts
+                                   GROUP BY category
+                                   ORDER BY count(*) DESC LIMIT 1');
+        $highest_cat->execute();
+        return $highest_cat->fetch(PDO::FETCH_ASSOC);
+    }
+
+
+
 
 }

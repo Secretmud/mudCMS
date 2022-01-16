@@ -1,6 +1,6 @@
 <?php
 
-use Secret\MudCms\persistence\Connection;
+use Secret\MudCms\persistence\PostRepo;
 
 if(!isset($_SESSION)) {
     session_start();
@@ -10,16 +10,12 @@ if($_SESSION['user'] == null){
     header("Location: login.php");
 }
 include("assets/contentHandler.php");
-include("assets/data.php");
-require_once("../persistence/Connection.php");
+require_once("../persistence/PostRepo.php");
 $ch = new contentHandler();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <?php include('admin-addins/head.php');
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);?>
+    <?php include('admin-addins/head.php');?>
 	<body>
 
 		<div class="main">
@@ -48,7 +44,8 @@ $ch = new contentHandler();
                             $date = date("Ymd");
                             $image = $_POST["postimage"];
                             $category = $_POST["category"];
-                            enter_content((new Connection)->getConnection(), $date, $title, $image, $content, $category);
+
+                            (new PostRepo())->add_post($date, $title, $image, $content, $category);
                         }
                         ?>
 					</div>
