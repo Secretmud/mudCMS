@@ -1,17 +1,20 @@
 <?php
 
+require_once("persistence/MenuRepo.php");
+require_once("persistence/PostRepo.php");
+require_once("posts/ContentParser.php");
 use Secret\MudCms\persistence\MenuRepo;
 use Secret\MudCms\persistence\PostRepo;
+use Secret\MudCms\assets\posts;
 
 class PostServer {
     private $posts_repo;
     private $menu_repo;
+    private $cp;
 
     public function __construct() {
-        require_once("persistence/MenuRepo.php");
         $this->posts_repo = new PostRepo();
         $this->menu_repo = new MenuRepo();
-        include "posts/content_parser.php";
         $this->cp = new ContentParser();
     }
 
