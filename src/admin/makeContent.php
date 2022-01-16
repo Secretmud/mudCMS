@@ -1,5 +1,6 @@
 <?php
 
+use Secret\MudCms\admin\assets\ContentHandler;
 use Secret\MudCms\persistence\PostRepo;
 
 if(!isset($_SESSION)) {

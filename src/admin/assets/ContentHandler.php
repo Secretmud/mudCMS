@@ -1,14 +1,14 @@
 <?php
 
+namespace Secret\MudCms\admin\assets;
+
+
 use Secret\MudCms\persistence\Connection;
+
 
 class ContentHandler {
 
-    private $conn;
-
     function __contructor() {
-        require_once("../../persistence/Connection.php");
-        $this->conn = (new Connection)->getConnection();
     }
 
     private function countChars($var) {

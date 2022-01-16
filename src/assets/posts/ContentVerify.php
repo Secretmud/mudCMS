@@ -1,4 +1,5 @@
 <?php
+namespace Secret\MudCms\assets\posts;
 
 class ContentVerify {
 

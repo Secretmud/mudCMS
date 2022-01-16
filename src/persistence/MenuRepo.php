@@ -4,7 +4,7 @@ use Secret\MudCms\persistence\Connection;
 use PDO;
 
 class MenuRepo {
-    private $conn;
+    private PDO $conn;
     public function __construct() {
         require_once ("Connection.php");
         $this->conn = (new Connection)->getConnection();

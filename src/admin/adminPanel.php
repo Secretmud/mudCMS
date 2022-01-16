@@ -34,7 +34,7 @@ if($_SESSION['user'] == null){
                         } catch (Exception $e) {
                             echo "No posts yet... Do something about that! head over to add content!";
                         }
-                        echo "Totalt: ".$post_repo->get_total_posts()."<br>";
+                        echo "Total: ".$post_repo->get_total_posts()."<br>";
 
 
                         ?>

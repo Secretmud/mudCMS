@@ -1,7 +1,8 @@
 <?php
 
 
-use Secret\MudCms\persistence\Connection;
+use Secret\MudCms\admin\assets\EditContent;
+use Secret\MudCms\persistence\PostRepo;
 
 if(!isset($_SESSION)) {
     session_start();
@@ -31,12 +32,13 @@ if($_SESSION['user'] == null){
                         </form>
                         <?php
                         require_once("../persistence/PostRepo.php");
-                        $conn = (new \Secret\MudCms\persistence\PostRepo())->getConnection();
-                        require("assets/editing.php");
+                        $post_repo = new PostRepo();
+                        require("assets/EditContent.php");
                         $ed = new EditContent();
-                        $ed->listPosts($conn);
+//                        $ed->listPosts($conn);
                         if (isset($_POST['submit'])) {
-                            $contentarr = $ch->getPost($conn, $id);
+                            $id = $_GET["id"];
+                            $contentarr = $post_repo->get_single_post($id);
                             echo "
                                 <form method='POST' enctype='multipart/form-data'>
                                     <input type='text' name='title' required>".$contentarr['title']."</input> <br>
