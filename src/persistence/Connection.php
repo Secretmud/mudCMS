@@ -5,7 +5,7 @@ use PDO;
 use PDOException;
 
 class Connection {
-    private static $connection;
+    private static PDO $connection;
 
     public static function getConnection()
     {

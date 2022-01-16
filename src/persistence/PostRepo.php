@@ -9,7 +9,7 @@ use PDO;
 
 class PostRepo
 {
-    private $conn;
+    private PDO $conn;
 
     public function __construct() {
         require_once ("Connection.php");
@@ -25,6 +25,12 @@ class PostRepo
         $posts->bindValue(':offset', $offset, PDO::PARAM_INT);
         $posts->execute();
         return $posts->fetchAll();
+    }
+
+    public function get_all_posts() {
+        $post = $this->conn->prepare("SELECT * FROM posts");
+        $post->execute();
+        return $post->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function get_total_posts(): int

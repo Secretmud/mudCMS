@@ -22,7 +22,7 @@ if($_SESSION['rights'] == 'admin'){
                         <a href="makeContent.php">Add content</a>
                     </li>
                     <li class="list-item">
-                        <a href="editContent.php">Edit content</a>
+                        <a href="EditContent.php">Edit content</a>
                     </li>
                 </ul>
             </div>

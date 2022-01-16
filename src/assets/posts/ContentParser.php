@@ -1,5 +1,7 @@
 <?php
 
+namespace Secret\MudCms\assets\posts;
+
 class ContentParser {
 
 
@@ -9,7 +11,8 @@ class ContentParser {
         return $code_block;
     }
 
-    private function countChars($var) {
+    private function countChars($var): int
+    {
         $amt = 0;
         foreach (str_split($var) as $x) {
             if ($x === "#")
@@ -20,7 +23,8 @@ class ContentParser {
         return $amt;
     }
 
-    public function content_parser($content) {
+    public function content_parser($content): string
+    {
         $arr = explode("\n", $content);
         $str = "";
         $first = true;

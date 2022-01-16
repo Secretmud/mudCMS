@@ -30,9 +30,6 @@ ob_start();
             if(!empty($_POST['email']) && !empty($_POST['password'])){
                 $password = $_POST['password'];
                 $email = $_POST['email'];
-
-                // todo - her skal vi bruke den nye busniesslaget
-
                 $user_service = new UserService();
                 $user_service->verify_log_in($email, $password);
             }
