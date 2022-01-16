@@ -24,11 +24,11 @@ class ContentVerify {
     }
 
     public function verify_image(String $image) : bool {
-
+        return preg_match("/!(.*):(.*)/", $image);
     }
 
-    public function verify_citation(String $image) : bool {
-        return preg_match("/!(.*):(.*)/", $image);
+    public function verify_citation(String $citation) : bool {
+        return preg_match("/--\((.*)\)/", $citation);
     }
 
 }
