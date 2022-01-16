@@ -1,7 +1,7 @@
 <?php
 function last_post_title($conn) {
     $post_title = $conn->prepare('SELECT title FROM posts 
-                                  ORDER BY postdate 
+                                  ORDER BY id 
                                   DESC LIMIT 1');
     $post_title->execute();
     $title = $post_title->fetch(PDO::FETCH_ASSOC);
