@@ -18,28 +18,24 @@ class ResponseBuilder {
         $this->limit = floor($this->posts_repo->get_total_posts()/$this->amt);
     }
 
-    public function page_view($page = 0): string
-    {
+    public function page_view($page = 0): string {
         if ($page < 0) $page = 0;
         if ($page > $this->limit) $page = $this->limit;
         return $this->site_layout($this->ps->get_posts_latest($this->amt, $page), $page, 1);
 
     }
 
-    public function post_view($id): string
-    {
+    public function post_view($id): string {
         return $this->site_layout($this->ps->get_single_post($id));
     }
 
-    public function show_cat($cat, $page=0): string
-    {
+    public function show_cat($cat, $page=0): string {
         if ($page < 0) $page = 0;
         if ($page > $this->limit) $page = $this->limit;
         return $this->site_layout($this->ps->get_posts_cat($cat, $this->amt, $page), $page, 1);
     }
 
-    public function add_arrows($page): string
-    {
+    public function add_arrows($page): string {
         $type = 'latest';
         if (!empty($_GET['type'])) {
             $type = $_GET['type'];
@@ -64,8 +60,7 @@ class ResponseBuilder {
         return $arrows;
     }
 
-    private function site_layout($main, $page=0, $show_arrows = 0 ): string
-    {
+    private function site_layout($main, $page=0, $show_arrows = 0 ): string {
         $response = "<div class='left-bar'><div class='menu menu_side'>";
         $response .= $this->ps->get_menu($this->amt);
         $response .= "</div></div><div class='center-top'><div class='grid-content'>";

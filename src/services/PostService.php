@@ -18,15 +18,13 @@ class PostService {
         $this->cp = new ContentParser();
     }
 
-    public function get_posts_latest($amnt, $page = 0): string
-    {
+    public function get_posts_latest($amnt, $page = 0): string {
         $offset = $page * $amnt;
         return $this->create_content($this->posts_repo->get_posts_latest($amnt, $offset));
     }
 
 
-    private function create_content($posts): string
-    {
+    private function create_content($posts): string {
         $str = "";
         foreach ($posts as $post) {
             $str .= "
@@ -46,8 +44,7 @@ class PostService {
         return $str;
     }
 
-    private function create_single_post_content($post): string
-    {
+    private function create_single_post_content($post): string {
         $str = "<div class='post'><div class='content-title'>".$post['title']."</div>";
         if ($post['postimage'] != null) {
             $str .= "<img class='image-post' src='".$post['postimage']."'></img>";
@@ -57,8 +54,7 @@ class PostService {
         return $str;
     }
 
-    private function get_content($content): string
-    {
+    private function get_content($content): string {
         $lines = explode("\n", $content);
         $new_content = "";
         $size = 3;
@@ -86,20 +82,17 @@ class PostService {
     }
 
 
-    public function get_menu($amnt): string
-    {
+    public function get_menu($amnt): string {
         return $this->menu_repo->get_menu($amnt);
 
     }
 
-    public function get_posts_cat($cat, $amnt, $page=0): string
-    {
+    public function get_posts_cat($cat, $amnt, $page=0): string {
         $offset = $page * $amnt;
         return $this->create_content($this->posts_repo->get_posts_cat($cat, $amnt, $offset));
     }
 
-    public function get_single_post($id): string
-    {
+    public function get_single_post($id): string {
         return $this->create_single_post_content($this->posts_repo->get_single_post($id));
     }
 }
