@@ -2,10 +2,6 @@
 
 namespace Secret\MudCms\admin\assets;
 
-
-use Secret\MudCms\persistence\Connection;
-
-
 class ContentHandler {
 
     function __contructor() {

@@ -1,6 +1,6 @@
 <?php
 
-#namespace Secret\MudCms\assets\posts;
+namespace Secret\MudCms\assets\posts;
 
 class ContentParser {
 

@@ -10,8 +10,7 @@ class Line extends GraphicsObject
     private $ex;
     private $ey;
 
-    public function __construct($color, $sx, $sy, $ex, $ey)
-    {
+    public function __construct($color, $sx, $sy, $ex, $ey) {
         $this->color = $color;
         $this->sx = $sx;
         $this->sy = $sy;
@@ -19,8 +18,7 @@ class Line extends GraphicsObject
         $this->ey = $ey;
     }
 
-    public function render($ge)
-    {
+    public function render($ge) {
         imageline($ge->getGraphicObject(),
             $this->sx, $this->sy,
             $this->ex, $this->ey,

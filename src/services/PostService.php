@@ -1,30 +1,30 @@
 <?php
-
-require_once("persistence/MenuRepo.php");
-require_once("persistence/PostRepo.php");
-require_once("posts/ContentParser.php");
+namespace Secret\MudCms\services;
+use Secret\MudCms\assets\posts\ContentParser;
 use Secret\MudCms\persistence\MenuRepo;
 use Secret\MudCms\persistence\PostRepo;
-use Secret\MudCms\assets\posts;
 
-class PostServer {
-    private $posts_repo;
-    private $menu_repo;
-    private $cp;
+class PostService {
+    private PostRepo $posts_repo;
+    private MenuRepo $menu_repo;
+    private ContentParser $cp;
 
     public function __construct() {
+        require_once("persistence/MenuRepo.php");
+        require_once("persistence/PostRepo.php");
         $this->posts_repo = new PostRepo();
         $this->menu_repo = new MenuRepo();
+        include "assets/posts/ContentParser.php";
         $this->cp = new ContentParser();
     }
 
-    public function get_posts_latest($amnt, $page = 0) {
+    public function get_posts_latest($amnt, $page = 0): string {
         $offset = $page * $amnt;
         return $this->create_content($this->posts_repo->get_posts_latest($amnt, $offset));
     }
 
 
-    private function create_content($posts) {
+    private function create_content($posts): string {
         $str = "";
         foreach ($posts as $post) {
             $str .= "
@@ -44,7 +44,7 @@ class PostServer {
         return $str;
     }
 
-    private function create_single_post_content($post) {
+    private function create_single_post_content($post): string {
         $str = "<div class='post'><div class='content-title'>".$post['title']."</div>";
         if ($post['postimage'] != null) {
             $str .= "<img class='image-post' src='".$post['postimage']."'></img>";
@@ -54,7 +54,7 @@ class PostServer {
         return $str;
     }
 
-    private function get_content($content) {
+    private function get_content($content): string {
         $lines = explode("\n", $content);
         $new_content = "";
         $size = 3;
@@ -82,18 +82,17 @@ class PostServer {
     }
 
 
-    public function get_menu($amnt) {
+    public function get_menu($amnt): string {
         return $this->menu_repo->get_menu($amnt);
 
     }
 
-    public function get_posts_cat($cat, $amnt, $page=0): string
-    {
+    public function get_posts_cat($cat, $amnt, $page=0): string {
         $offset = $page * $amnt;
         return $this->create_content($this->posts_repo->get_posts_cat($cat, $amnt, $offset));
     }
 
-    public function get_single_post($id) {
+    public function get_single_post($id): string {
         return $this->create_single_post_content($this->posts_repo->get_single_post($id));
     }
 }

@@ -6,13 +6,13 @@ namespace Secret\MudCms\persistence;
 use Secret\MudCms\persistence\Connection;
 use Exception;
 use PDO;
+require_once ("Connection.php");
 
 class PostRepo
 {
     private PDO $conn;
 
     public function __construct() {
-        require_once ("Connection.php");
         $this->conn = (new Connection)->getConnection();
     }
 
