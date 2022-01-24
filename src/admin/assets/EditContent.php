@@ -2,15 +2,15 @@
 
 namespace Secret\MudCms\admin\assets;
 
-use PDO;
+
 use Secret\MudCms\persistence\PostRepo;
 
 class EditContent {
 
     private PostRepo $post_repo;
 
-    function __contructor() {
-        require_once("../../persistence/PostRepo.php");
+    function __construct() {
+        require_once("../persistence/PostRepo.php");
         $this->post_repo = new PostRepo();
     }
 
@@ -32,10 +32,24 @@ class EditContent {
                     <div class='poster'>
                         ".$pa['poster']."
                     </div>
+                    <div>
+                        <form method='get'>
+                        <input type='text' style='display: none' value='".$pa['id']."' name='search'>
+                        <input type='submit' value='select'>
+                        </form>
+                    </div>
+                  
                 </div>
             ";
         }
         echo "</div>";
-        $conn = null;
+    }
+
+    private function addOrUpdateUrlParam($name, $value)
+    {
+        $params = $_GET;
+        unset($params[$name]);
+        $params[$name] = $value;
+        return basename($_SERVER['PHP_SELF']).'?'.http_build_query($params);
     }
 }

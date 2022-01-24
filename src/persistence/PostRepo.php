@@ -28,9 +28,9 @@ class PostRepo
     }
 
     public function get_all_posts() {
-        $post = $this->conn->prepare("SELECT * FROM posts");
+        $post = $this->conn->prepare("SELECT * FROM posts ORDER BY id DESC");
         $post->execute();
-        return $post->fetchAll(PDO::FETCH_ASSOC);
+        return $post->fetchAll();
     }
 
     public function get_total_posts(): int
@@ -80,13 +80,7 @@ class PostRepo
 
     public function add_post( $date, $title, $postimage, $content, $category){
 
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-        ob_start();
-        if ($_SESSION['user'] == null) {
-            header("Location: login.php");
-        }
+        $this->check_login();
 
 
         $save_data = $this->conn->prepare("INSERT INTO posts(postdate, title, poster, content, postimage, category) 
@@ -95,7 +89,19 @@ class PostRepo
 
     }
 
-    public function edit_post() {
+    public function edit_post($id, $title, $post_image, $content, $category) {
+
+        $this->check_login();
+
+
+        $save_data = $this->conn->prepare("UPDATE posts SET title =:title, content=:content, postimage=:postimage, category=:category WHERE id=:id");
+        $save_data->bindParam(':title', $title);
+        $save_data->bindParam(':postimage', $post_image);
+        $save_data->bindParam(':content', $content);
+        $save_data->bindParam(':category', $category);
+        $save_data->bindParam(':id', $id);
+
+        $save_data->execute();
 
     }
 
@@ -119,7 +125,19 @@ class PostRepo
         return $highest_cat->fetch(PDO::FETCH_ASSOC)['category'];
     }
 
-
+    /**
+     * @return void
+     */
+    public function check_login(): void
+    {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        ob_start();
+        if ($_SESSION['user'] == null) {
+            header("Location: login.php");
+        }
+    }
 
 
 }

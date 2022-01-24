@@ -14,7 +14,13 @@ if($_SESSION['user'] == null){
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <?php include('admin-addins/head.php');?>
+    <?php include('admin-addins/head.php');
+
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+    ?>
+
 	<body>
 		<div class="main">
             <div class="left-bar">
@@ -26,30 +32,34 @@ if($_SESSION['user'] == null){
                 <div class="grid-content">
 					<div class="content">
                         <h3>Edit content:</h3>
-                        <form method="post">
-                            <input type="text" name="search">
-                            <input type="submit" value="submit">
-                        </form>
                         <?php
-                        require_once("../persistence/PostRepo.php");
-                        $post_repo = new PostRepo();
-                        require("assets/EditContent.php");
+                        require_once("assets/EditContent.php");
                         $ed = new EditContent();
+                        $ed->listPosts();
 //                        $ed->listPosts($conn);
-                        if (isset($_POST['submit'])) {
-                            $id = $_GET["id"];
+                        if (isset($_GET['search'])) {
+                            $id = $_GET["search"];
+                            require_once("../persistence/PostRepo.php");
+                            $post_repo = new PostRepo();
                             $contentarr = $post_repo->get_single_post($id);
                             echo "
                                 <form method='POST' enctype='multipart/form-data'>
-                                    <input type='text' name='title' required>".$contentarr['title']."</input> <br>
-                                    <input type='file' name='postimage' >".$contentarr['postimage']."</input><br>
-                                    <input type='text' name='category'required>".$contentarr['category']."</input><br>
+                                    <input type='text' name='title' placeholder='title' required value='".$contentarr['title']."'/> <br>
+                                    <input type='text' name='postimage' placeholder='path/to/image' value='".$contentarr['postimage']."'/><br>
+                                    <input type='text' name='category' placeholder='category' required value='".$contentarr['category']."'/><br>
                                     <textarea required name='content' id='contentBox' style='height: 300px; width: 100%; resize: none;'>".$contentarr['content']."</textarea>
                                     <input type='submit' value='submit change' name='submit_change'>
                                 </form>
                             ";
                             if (isset($_POST["submit_change"])) {
-                                //enter_content($conn, $date, $title, $image, $content, $category);
+                                $title = $_POST['title'];
+                                $postImage = $_POST['postimage'];
+                                $category = $_POST['category'];
+                                $content = $_POST['content'];
+
+                                $post_repo->edit_post($id, $title, $postImage, $content, $category);
+                                header("Refresh:0");
+//                                enter_content($conn, $date, $title, $image, $content, $category);
                             }
                         }
                         ?>
