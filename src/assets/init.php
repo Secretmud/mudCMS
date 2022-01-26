@@ -5,10 +5,14 @@ use Secret\MudCms\persistence\Connection;
 class StartCheck {
 
     private $conn;
+
     public function __construct() {
         require_once("persistence/Connection.php");
-        $this->conn = (new Connection)->getConnection();
     }
+
+    private function dataBaseConn() {
+        $this->conn = (new Connection)->getConnection();
+    } 
 
     public function dataBaseCheck() {
         return file_exists("persistence/conf/config.php");
@@ -16,10 +20,8 @@ class StartCheck {
 
     public function databaseCreate() {
         require_once "persistence/conf/config.php";
-
         $this->conn->prepare("CREATE DATABASE IF NOT EXISTS $database");
         usleep(500);
-        $conn = null;
     }
 
     public function tableCreate() {
@@ -42,7 +44,6 @@ class StartCheck {
             category varchar(255))');
         $test->execute();
         usleep(500);
-        $conn = null;
     }
 
     private function register($uname, $pass, $email) {
@@ -54,7 +55,6 @@ class StartCheck {
         } catch (Exception $e) {
             echo "Exception -> ".$e->getMessage();
         }
-        $conn = null;
         header("Location: admin/login.php");
     }
 
@@ -97,21 +97,31 @@ class StartCheck {
                          "\$pass = \"".$_POST['dbpass']."\";",
                          "\$host = \"".$_POST['host']."\";"
                         ];  
-            touch("assets/conf/config.php");
-            chmod("assets/conf/config.php", 0755);
-            $file = fopen("assets/conf/config.php", "w");
-            foreach ($settings as $i) {
-                fwrite($file, $i."\n");
+            $fname = "config.php"; 
+            $dir = "../persistence/conf/";
+            if (!file_exists($dir.$fname)) {
+                mkdir($dir, 0777, true);
+                touch($dir.$fname);
+                chmod($dir.$fname, 0644);
             }
-            fclose($file);
-            $this->databaseCreate();
-            $this->tableCreate();
-            if ($_POST['pass1'] == $_POST['pass2']) {
-                $this->register($_POST["cms-user"],$_POST["pass1"],$_POST["cms-email"]);
+            $file = fopen($fname, "w+");
+            if ($file) {
+                foreach ($settings as $i) {
+                    fwrite($file, $i."\n");
+                }
+                fclose($file);
+                $this->dataBaseConn();
+                $this->databaseCreate();
+                $this->tableCreate();
+                if ($_POST['pass1'] == $_POST['pass2']) {
+                    $this->register($_POST["cms-user"],$_POST["pass1"],$_POST["cms-email"]);
+                } else {
+                    echo "<script>alert('Password mismatch!')</script>";
+                }
+                sleep(2);
             } else {
-                echo "<script>alert('Password mismatch!')</script>";
+                echo "Not able to read file...";
             }
-            sleep(2);
         }
     }
 }
