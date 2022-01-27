@@ -98,13 +98,15 @@ class StartCheck {
                          "\$host = \"".$_POST['host']."\";"
                         ];  
             $fname = "config.php"; 
-            $dir = "../persistence/conf/";
-            if (!file_exists($dir.$fname)) {
-                mkdir($dir, 0777, true);
+            $dir = "persistence/conf/";
+            if (!file_exists("persistence/conf/".$fname)) {
+                if (!file_exists("persistence/conf/")) {
+                    mkdir($dir, 0777, true);
+                }
                 touch($dir.$fname);
                 chmod($dir.$fname, 0644);
             }
-            $file = fopen($fname, "w+");
+            $file = fopen($dir.$fname, "w+");
             if ($file) {
                 foreach ($settings as $i) {
                     fwrite($file, $i."\n");
