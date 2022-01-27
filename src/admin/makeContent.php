@@ -10,9 +10,7 @@ ob_start();
 if($_SESSION['user'] == null){
     header("Location: login.php");
 }
-include("assets/contentHandler.php");
 require_once("../persistence/PostRepo.php");
-$ch = new contentHandler();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,28 +54,6 @@ $ch = new contentHandler();
                 <div class="content">
                     <?php include('admin-addins/footer.php');?>
                 </div>
-            </div>
-        </div>
-        <div class="imgModal" id="imgModal">
-            <div class="modalContent">
-                <?php
-                    $ch->displayImg();
-                ?>
-            </div>
-            <div class="modalImgLoc">
-                <p>Image location:</p>
-                <p id="imgLocation"></p>
-                <p>Image name:</p>
-                <p id="imgName"></p>
-                <p>Image description:</p>
-                <p id="imgDesc"></p>
-                <p>Image size:</p>
-                <p id="imgSize"></p>
-                <p>Image extension:</p>
-                <p id="imgExtension"></p>
-            </div>
-            <div class="modalBottom" id="imgInc">
-                <p id="imgInc"></p>
             </div>
         </div>
         <script src="js/main.js"></script>

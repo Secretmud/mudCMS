@@ -14,7 +14,7 @@
                 <div class="grid-content">
 					<div class="content">
 						<h3>Please log in</h3>
-                        <a href="admin/login.php">Log in</a>
+                        <a href="login.php">Log in</a>
 					</div>
 				</div>
             </div>

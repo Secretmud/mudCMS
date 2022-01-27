@@ -28,6 +28,7 @@ class ContentParser {
         $first = true;
         $code = array();
         $ln = 0;
+        $citation = [];
         foreach ($arr as $a) {
             if (preg_match("/^~/", $a)) {
                 array_push($code, $ln);
@@ -53,6 +54,9 @@ class ContentParser {
         }
         $x = 0;
         for ($i = 0; $i < sizeof($arr); $i++) {
+            if (strlen($arr[$i]) === 1) {
+                $arr[$i] == "<p>";
+            }
             if (in_array($i, $code)) {
                 $i = $code[$x+1];
                 $x+=2;
@@ -76,14 +80,26 @@ class ContentParser {
                 }
                 $arr[$i] = preg_replace("/#{".$count."}(.*)/", $replace, $arr[$i]);
             } else if (preg_match("/-- (.*)/m", $arr[$i])) {
-                $arr[$i] = preg_replace("/-- (.*)/", "<p class='citation'>$1</p>", $arr[$i]);
+                $last = (sizeof($citation) > 0) ? sizeof($citation) + 1 : 1;
+                $parts = explode("--", $arr[$i]);
+                array_push($citation, [$last => $parts[1]]);
+                $arr[$i] = $parts[0] . "<a class='citation-number' href='#" . trim($parts[1], '--') . $last . "'>" . $last . "</a>"; 
             } else if (preg_match("/!(.*):(.*)/m", $arr[$i])) {
                 $arr[$i] = str_replace(array("\r", "\n"), '', $arr[$i]);
                 $arr[$i] = preg_replace("/!(.*):(.*)/", "<img class='image' src='$1' alt='$2'>", $arr[$i]);
             }
         }
+        $cites = "<div><h2>References</h2>";
+        foreach ($citation as $c) {
+            foreach ($c as $k => $v) {
+                $cites .= "<a id=" . trim($arr[$i], '--') . $last . "'>" . $k . "</a>";
+
+                $cites .= "<span class='citation'>" . trim($v, "--") . "</span>";
+            }
+        }
+        $cites .= "</div>";
+        array_push($arr, $cites);
         foreach ($arr as $ot) $str .= $ot;
         return $str;
     }
-
 }

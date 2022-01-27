@@ -104,7 +104,7 @@ class StartCheck {
                     mkdir($dir, 0777, true);
                 }
                 touch($dir.$fname);
-                chmod($dir.$fname, 0644);
+                chmod($dir.$fname, 0777);
             }
             $file = fopen($dir.$fname, "w+");
             if ($file) {
@@ -112,6 +112,8 @@ class StartCheck {
                     fwrite($file, $i."\n");
                 }
                 fclose($file);
+                chmod($dir.$fname, 0644);
+                chmod($dir, 0755);
                 $this->dataBaseConn();
                 $this->databaseCreate();
                 $this->tableCreate();
