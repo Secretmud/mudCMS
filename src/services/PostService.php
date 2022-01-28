@@ -33,10 +33,14 @@ class PostService {
             if ($post['postimage'] != null) {
                 $str .= "<img class='image-post' src='".$post['postimage']."'></img>";
             }
-            $str .="<div class='content-info'>".$post['poster']."<br>".$post['postdate']."<br>".$post['category']."</div>
-                <div class='content'>".$this->cp->content_parser($this->get_content($post['content']))."</div>
-                <a class='content-link' href='page_view.php?contentId=".$post['id']."'>Read more...</a>
-            </div>";
+            $str .="<div class='content-info'>
+                        <span>".$post['poster']."</span>
+                        <span>".$post['postdate']."</span>
+                        <span>".$post['category']."</span>
+                    </div>
+                    <div class='content'>".$this->cp->content_parser($this->get_content($post['content']))."</div>
+                    <a class='content-link' href='page_view.php?contentId=".$post['id']."'>Read more...</a>
+                    </div>";
         }
 
         return $str;
@@ -44,6 +48,7 @@ class PostService {
 
     private function create_single_post_content($post): string {
         $str = "<div class='post'><div class='content-title'>".$post['title']."</div>";
+        $str .="<div class='content-info'><span>".$post['poster']."</span><span>".$post['postdate']."</span><span>".$post['category']."</span></div>";
         if ($post['postimage'] != null) {
             $str .= "<img class='image-post' src='".$post['postimage']."'></img>";
         }
