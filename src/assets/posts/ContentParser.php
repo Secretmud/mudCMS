@@ -79,26 +79,30 @@ class ContentParser {
                         break;
                 }
                 $arr[$i] = preg_replace("/#{".$count."}(.*)/", $replace, $arr[$i]);
-            } else if (preg_match("/-- (.*)/m", $arr[$i])) {
+            } else if (preg_match("/\{.*\}/", $arr[$i])) {
                 $last = (sizeof($citation) > 0) ? sizeof($citation) + 1 : 1;
-                $parts = explode("--", $arr[$i]);
-                array_push($citation, [$last => $parts[1]]);
-                $arr[$i] = $parts[0] . "<a class='citation-number' href='#" . trim($parts[1], '--') . trim($last, " ") . "'>" . $last . "</a>"; 
+                preg_match("/\{(.*)\}/", $arr[$i], $matches);
+                foreach ($matches as $k => $v) {
+                    if ($k === 1) 
+                        array_push($citation, [$last => $v]); 
+                    if ($k === 0)
+                        $arr[$i] = str_replace($v, "<a class='citation-number' href='#" . $last . "'>" . $last . "</a>", $arr[$i]);
+                }
             } else if (preg_match("/!(.*):(.*)/m", $arr[$i])) {
                 $arr[$i] = str_replace(array("\r", "\n"), '', $arr[$i]);
                 $arr[$i] = preg_replace("/!(.*):(.*)/", "<img class='image' src='$1' alt='$2'>", $arr[$i]);
             }
         }
         if (sizeof($citation) > 0) {
-            $cites = "<div><h2>References</h2>";
+            $cites = "<div><h2>References</h2><div class='citation-list'>";
             foreach ($citation as $c) {
                 foreach ($c as $k => $v) {
-                    $cites .= "<a id='" . trim($v, '--') . "'>" . $k . "</a>";
+                    $cites .= "<div><a id='" . $k . "'>" . $k . "</a>";
 
-                    $cites .= "<span class='citation'>" . trim($v, "--") . "</span>";
+                    $cites .= "<span class='citation'>" . $v . "</span></div>";
                 }
             }
-            $cites .= "</div>";
+            $cites .= "</div></div>";
             array_push($arr, $cites);
         }
         foreach ($arr as $ot) $str .= $ot;
