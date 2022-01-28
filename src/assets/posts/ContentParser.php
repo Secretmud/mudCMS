@@ -86,18 +86,22 @@ class ContentParser {
                     if ($k === 1) 
                         array_push($citation, [$last => $v]); 
                     if ($k === 0)
-                        $arr[$i] = str_replace($v, "<a class='citation-number' href='#" . $last . "'>" . $last . "</a>", $arr[$i]);
+                        $arr[$i] = str_replace($v, "<a class='citation-number' id='b" . $last . "' href='#" . $last . "'>" . $last . "</a>", $arr[$i]);
                 }
             } else if (preg_match("/!(.*):(.*)/m", $arr[$i])) {
                 $arr[$i] = str_replace(array("\r", "\n"), '', $arr[$i]);
                 $arr[$i] = preg_replace("/!(.*):(.*)/", "<img class='image' src='$1' alt='$2'>", $arr[$i]);
             }
+            if (is_string($arr[$i])) {
+                $arr[$i] = "<p class='post-paragraph' >" . $arr[$i] . "</p>";
+            }
+            
         }
         if (sizeof($citation) > 0) {
-            $cites = "<div><h2>References</h2><div class='citation-list'>";
+            $cites = "<div><span class='content-title'>References</span><div class='citation-list'>";
             foreach ($citation as $c) {
                 foreach ($c as $k => $v) {
-                    $cites .= "<div><a id='" . $k . "'>" . $k . "</a>";
+                    $cites .= "<div><a class='citation-list-number' href='#b".$k."'id='" . $k . "'>" . $k . "</a>";
 
                     $cites .= "<span class='citation'>" . $v . "</span></div>";
                 }
@@ -108,4 +112,16 @@ class ContentParser {
         foreach ($arr as $ot) $str .= $ot;
         return $str;
     }
+
+    private function citation($string) {
+        preg_match("/\{(.*)\}/", $string, $matches);
+        foreach ($matches as $k => $v) {
+            if ($k === 1) 
+                array_push($citation, [$last => $v]); 
+            if ($k === 0)
+                $string = str_replace($v, "<a class='citation-number' id='b" . $last . "' href='#" . $last . "'>" . $last . "</a>", $string);
+        }
+        return $string;
+    }
+
 }
