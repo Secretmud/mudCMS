@@ -57,7 +57,7 @@ class ResponseBuilder {
             $arrows .= "<div class=''><i class='arrow-inactive right'></i></div>";
         }
 
-        $arrows .= "</div>";
+        #$arrows .= "</div>";
 
         return $arrows;
     }

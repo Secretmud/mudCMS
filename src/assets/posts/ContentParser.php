@@ -98,9 +98,9 @@ class ContentParser {
                     $cites .= "<span class='citation'>" . trim($v, "--") . "</span>";
                 }
             }
+            $cites .= "</div>";
+            array_push($arr, $cites);
         }
-        $cites .= "</div>";
-        array_push($arr, $cites);
         foreach ($arr as $ot) $str .= $ot;
         return $str;
     }
