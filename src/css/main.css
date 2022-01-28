@@ -112,6 +112,12 @@ h3 {
 .center-top {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 /*
     grid-positioning, it's the easiest way of getting the layout you want
@@ -132,7 +138,6 @@ h3 {
 }
 .grid-content {
     width: 100%;
-    margin: 10px;
 }
 
 /*
@@ -260,17 +265,8 @@ h3 {
     Mobile-friendly stuff
 */
 @media (max-width: 750px) {
-	.main {
-		display: flex;
-        flex-direction: column;
-		width: 95%;
-	}
-
 	.grid-content {
 		grid-template-columns: 100%;
-	}
-	.main > .left-bar, .center-top, .center-bottom {
-		margin: 0.2em;
 	}
     .header {
         display: flex;
@@ -296,14 +292,8 @@ h3 {
     }
 }
 @media (min-width: 751px) and (max-width: 1099px) {
-	.main {
-		width: 90%;
-	}
 	.grid-content {
         grid-template-columns: 100%;
-	}
-	.main > .left-bar, .center-top, .center-bottom {
-		margin: 0.3em;
 	}
     .header {
         display: flex;
@@ -321,9 +311,6 @@ h3 {
     }
 }
 @media (min-width: 1100px) and (max-width: 1400px) {
-	.main {
-		width: 80%;
-	}
 	.grid-content {
 		grid-template-columns: 100%;
 	}

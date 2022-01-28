@@ -33,12 +33,10 @@ class PostService {
             if ($post['postimage'] != null) {
                 $str .= "<img class='image-post' src='".$post['postimage']."'></img>";
             }
-            $str .="<div class='content-info'>".$post['poster']."<br>".$post['postdate']."<br>".$post['category']."
-                </div>
+            $str .="<div class='content-info'>".$post['poster']."<br>".$post['postdate']."<br>".$post['category']."</div>
                 <div class='content'>".$this->cp->content_parser($this->get_content($post['content']))."</div>
-                
                 <a class='content-link' href='page_view.php?contentId=".$post['id']."'>Read more...</a>
-                </div>";
+            </div>";
         }
 
         return $str;

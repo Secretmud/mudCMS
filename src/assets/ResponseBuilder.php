@@ -52,10 +52,12 @@ class ResponseBuilder {
         $arrows .= $page;
         // <a class='' href='page_view.php?type=cat&category=".$row['category']."'>".$row['category']."</a>
         if ($page < $this->limit) {
-            $arrows .= "<a class='' href='page_view.php?type=".$type.$cat_string."&page=".($page+1)."'><i class='arrow right''></i></a></div>";
+            $arrows .= "<a class='' href='page_view.php?type=".$type.$cat_string."&page=".($page+1)."'><i class='arrow right''></i></a>";
         } else {
             $arrows .= "<div class=''><i class='arrow-inactive right'></i></div>";
         }
+
+        $arrows .= "</div>";
 
         return $arrows;
     }
@@ -68,7 +70,7 @@ class ResponseBuilder {
         if ($show_arrows) {
             $response .= $this->add_arrows($page);
         }
-        $response .= "</div></div>";
+        #$response .= "</div></div>";
         return $response;
     }
 
