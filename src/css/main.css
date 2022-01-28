@@ -114,6 +114,7 @@ h3 {
     justify-content: center;
     flex-direction: column;
     overflow: scroll;
+    height: 100vh;
 }
 
 ::-webkit-scrollbar {

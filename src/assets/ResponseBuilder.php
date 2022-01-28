@@ -57,7 +57,7 @@ class ResponseBuilder {
             $arrows .= "<div class=''><i class='arrow-inactive right'></i></div>";
         }
 
-        #$arrows .= "</div>";
+        $arrows .= "</div>";
 
         return $arrows;
     }
@@ -70,7 +70,7 @@ class ResponseBuilder {
         if ($show_arrows) {
             $response .= $this->add_arrows($page);
         }
-        #$response .= "</div></div>";
+        $response .= "</div></div>";
         return $response;
     }
 
