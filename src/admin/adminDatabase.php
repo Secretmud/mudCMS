@@ -37,11 +37,6 @@ if($_SESSION['user'] == null){
 					</div>
 				</div>
             </div>
-            <div class="center-bottom">
-                <div class="content">
-                    <?php include 'admin-addins/footer.php';?>
-                </div>
-            </div>
         </div>
 	</body>
 </html>
