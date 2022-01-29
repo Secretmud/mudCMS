@@ -74,20 +74,19 @@ class ContentParser {
                     case 3:
                         $replace = "<h3>$1</h3>";
                         break;
+                    case 4: 
+                        $replace = "<h3>$1</h3>";
+                        break;
+                    case 5:
+                        $replace = "<h3>$1</h3>";
+                        break;
                     default:
                         $replace = "<h1>$1</h1>";
                         break;
                 }
                 $arr[$i] = preg_replace("/#{".$count."}(.*)/", $replace, $arr[$i]);
             } else if (preg_match("/\{.*\}/", $arr[$i])) {
-                $last = (sizeof($citation) > 0) ? sizeof($citation) + 1 : 1;
-                preg_match("/\{(.*)\}/", $arr[$i], $matches);
-                foreach ($matches as $k => $v) {
-                    if ($k === 1) 
-                        array_push($citation, [$last => $v]); 
-                    if ($k === 0)
-                        $arr[$i] = str_replace($v, "<a class='citation-number' id='b" . $last . "' href='#" . $last . "'>" . $last . "</a>", $arr[$i]);
-                }
+                $arr[$i] = $this->citation($arr[$i], $citation);
             } else if (preg_match("/!(.*):(.*)/m", $arr[$i])) {
                 $arr[$i] = str_replace(array("\r", "\n"), '', $arr[$i]);
                 $arr[$i] = preg_replace("/!(.*):(.*)/", "<img class='image' src='$1' alt='$2'>", $arr[$i]);
@@ -113,15 +112,17 @@ class ContentParser {
         return $str;
     }
 
-    private function citation($string) {
+    private function citation($string, &$citation): String {
+        $last = (sizeof($citation) > 0) ? sizeof($citation) + 1 : 1;
+        $str = "";
         preg_match("/\{(.*)\}/", $string, $matches);
         foreach ($matches as $k => $v) {
             if ($k === 1) 
                 array_push($citation, [$last => $v]); 
             if ($k === 0)
-                $string = str_replace($v, "<a class='citation-number' id='b" . $last . "' href='#" . $last . "'>" . $last . "</a>", $string);
+                $str = str_replace($v, "<a class='citation-number' id='b" . $last . "' href='#" . $last . "'>" . $last . "</a>", $string);
         }
-        return $string;
+        return $str;
     }
 
 }
