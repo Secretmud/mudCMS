@@ -62,28 +62,9 @@ class ContentParser {
                 $x+=2;
             }
             if (preg_match("/^#/m", $arr[$i])) {
-                $replace = "";
-                $count = $this->countChars($arr[$i]); 
-                switch($count) {
-                    case 1:
-                        $replace = "<h1>$1</h1>";
-                        break;
-                    case 2:
-                        $replace = "<h2>$1</h2>";
-                        break;
-                    case 3:
-                        $replace = "<h3>$1</h3>";
-                        break;
-                    case 4: 
-                        $replace = "<h3>$1</h3>";
-                        break;
-                    case 5:
-                        $replace = "<h3>$1</h3>";
-                        break;
-                    default:
-                        $replace = "<h1>$1</h1>";
-                        break;
-                }
+                $count = $this->countChars($arr[$i]);
+                $count = ($count < 6) ? $count : 5; 
+                $replace = "<h".$count.">$1</h".$count.">";
                 $arr[$i] = preg_replace("/#{".$count."}(.*)/", $replace, $arr[$i]);
             } else if (preg_match("/\{.*\}/", $arr[$i])) {
                 $arr[$i] = $this->citation($arr[$i], $citation);
